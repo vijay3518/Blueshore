@@ -24,7 +24,7 @@ export function Footer() {
     <footer className="bg-[#07111f] px-4 py-14 text-white sm:px-8 lg:px-12">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.7fr_0.8fr_1fr]">
         <div>
-          <Logo size="footer" inverted />
+          <Logo size="footer" />
           <p className="mt-6 max-w-sm text-sm leading-7 text-white/[0.66]">
             Your Dream. Our Guidance. Global Future.
           </p>

@@ -15,18 +15,7 @@ const SECTION_IDS = NAV_LINKS.map((l) => navHrefToSectionId(l.href));
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-
-    onScroll();
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -61,11 +50,7 @@ export function Navigation() {
   return (
     <>
       <motion.header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-xl"
-            : "bg-transparent border-transparent"
-        }`}
+        className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white shadow-sm"
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
@@ -98,9 +83,7 @@ export function Navigation() {
                     className={`relative px-1 py-2 text-xs font-black uppercase tracking-[0.16em] transition-colors ${
                       isActive
                         ? "text-[#c68b20]"
-                        : scrolled
-                          ? "text-[#07111f]/70 hover:text-[#07111f]"
-                          : "text-white/80 hover:text-white"
+                        : "text-[#07111f]/70 hover:text-[#07111f]"
                     }`}
                   >
                     {link.label}
@@ -132,11 +115,7 @@ export function Navigation() {
 
             <button
               type="button"
-              className={`inline-flex h-11 w-11 items-center justify-center transition lg:hidden ${
-                scrolled
-                  ? "border border-slate-200 bg-slate-50 text-[#07111f]"
-                  : "border border-white/30 bg-white/10 text-white backdrop-blur"
-              }`}
+              className="inline-flex h-11 w-11 items-center justify-center border border-slate-200 bg-slate-50 text-[#07111f] transition lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               onClick={() => setOpen((v) => !v)}

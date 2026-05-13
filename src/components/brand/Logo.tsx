@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 
 type LogoProps = {
   className?: string;
@@ -18,19 +18,19 @@ export function Logo({
   if (variant === "emblem") {
     return (
       <div
-        className={`relative shrink-0 overflow-hidden rounded-xl bg-white/95 p-1.5 shadow-md shadow-black/15 ring-1 ring-white/205 ${className}`}
+        className={`relative shrink-0 overflow-hidden rounded-xl bg-white/95 p-1.5 shadow-md shadow-black/15 ring-1 ring-white/25 ${className}`}
         style={{
           width: size === "hero" ? 56 : 44,
           height: size === "hero" ? 56 : 44,
         }}
       >
-        <Image
-          src="/blueshore-logo-full.png"
+        <img
+          src="images/blueshore-logo-full.png"
           alt=""
-          fill
+    
           sizes="64px"
           className="object-contain"
-          priority={size === "hero"}
+        
         />
       </div>
     );
@@ -63,13 +63,13 @@ export function Logo({
       className={`flex shrink-0 items-center gap-2.5 ${className}`}
     >
       <div className={markDims}>
-        <Image
-          src="/blueshore-logo-full.png"
+        <img
+          src="images/blueshore-logo-full.png"
           alt=""
-          fill
+          
           sizes="(max-width: 640px) 64px, 112px"
           className="object-contain"
-          priority={size === "hero"}
+          
         />
       </div>
       <div className="leading-none" aria-label="BlueShore Overseas">
