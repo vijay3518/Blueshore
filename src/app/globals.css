@@ -1,0 +1,307 @@
+@import "tailwindcss";
+
+:root {
+  --bs-navy: #0a1f5c;
+  --bs-ocean: #1565c0;
+  --bs-sky: #2196f3;
+  --bs-gold: #f4a800;
+  --bs-white: #ffffff;
+  --background: #ffffff;
+  --foreground: #0a1f5c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --color-bs-navy: #0a1f5c;
+  --color-bs-ocean: #1565c0;
+  --color-bs-sky: #2196f3;
+  --color-bs-gold: #f4a800;
+  --color-bs-white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.text-gradient-gold-navy {
+  background: linear-gradient(
+    135deg,
+    var(--bs-navy) 0%,
+    var(--bs-navy) 35%,
+    var(--bs-gold) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero waves */
+@keyframes wave-shift {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0);
+  }
+}
+
+@keyframes dolphin-jump {
+  0%,
+  75% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  78% {
+    transform: translateY(-80px) rotate(-18deg);
+    opacity: 1;
+  }
+  82% {
+    transform: translateY(-55px) rotate(12deg);
+    opacity: 1;
+  }
+  88% {
+    transform: translateY(12px) rotate(-6deg);
+    opacity: 1;
+  }
+  92%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes foam-burst {
+  0%,
+  74% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  76% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  88% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes seagull-drift {
+  0% {
+    transform: translateX(-10vw) translateY(0);
+  }
+  100% {
+    transform: translateX(110vw) translateY(-8px);
+  }
+}
+
+@keyframes tassel-swing {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes gold-rays {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes cloud-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(40vw, -12px, 0) scale(1.06);
+  }
+}
+
+@keyframes cloud-float-reverse {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-42vw, 10px, 0) scale(1.05);
+  }
+}
+
+/* Journey timeline: gold ring pulse when plane reaches step */
+@keyframes step-ring-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 168, 0, 0.55);
+  }
+  45% {
+    box-shadow: 0 0 0 14px rgba(244, 168, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 168, 0, 0);
+  }
+}
+
+.how-step-ring--active {
+  animation: step-ring-pulse 1.1s ease-out infinite;
+}
+
+@keyframes stamp-impact {
+  0% {
+    transform: scale(4) rotate(-12deg);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(0.92) rotate(-4deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.06) rotate(-2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-3deg);
+    opacity: 1;
+  }
+}
+
+.reduce-motion * {
+  animation: none !important;
+}
+
+@keyframes ray-sweep {
+  0%   { opacity: 0; transform: rotate(-5deg) translateY(0); }
+  30%  { opacity: 1; }
+  70%  { opacity: 0.6; }
+  100% { opacity: 0; transform: rotate(-5deg) translateY(-40px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-30px) scale(1.05); }
+}
+
+@keyframes wave1 {
+  0%,100% { transform: translateX(0) scaleY(1); }
+  25%      { transform: translateX(-30px) scaleY(1.03); }
+  75%      { transform: translateX(20px) scaleY(0.97); }
+}
+
+@keyframes wave2 {
+  0%,100% { transform: translateX(0) scaleY(1); }
+  33%      { transform: translateX(25px) scaleY(1.04); }
+  66%      { transform: translateX(-20px) scaleY(0.96); }
+}
+
+@keyframes wave3 {
+  0%,100% { transform: translateX(0); }
+  50%      { transform: translateX(-18px); }
+}
+
+@keyframes cloudDrift {
+  from { transform: translateX(110vw); }
+  to   { transform: translateX(-350px); }
+}
+
+@keyframes cloudDriftRev {
+  from { transform: translateX(-350px); }
+  to   { transform: translateX(110vw); }
+}
+
+@keyframes foam-pulse {
+  0%,100% { opacity: 0.5; r: 3; }
+  50%      { opacity: 0.9; r: 5; }
+}
+
+@keyframes dolphin-jump {
+  0%   { transform: translateX(0) translateY(0) rotate(0deg); opacity:1; }
+  20%  { transform: translateX(30px) translateY(-75px) rotate(22deg); opacity:1; }
+  45%  { transform: translateX(70px) translateY(-95px) rotate(18deg); opacity:1; }
+  65%  { transform: translateX(110px) translateY(-60px) rotate(-10deg); opacity:1; }
+  80%  { transform: translateX(130px) translateY(-10px) rotate(-25deg); opacity:1; }
+  90%  { transform: translateX(140px) translateY(5px) rotate(-5deg); opacity:0.6; }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); opacity:0; }
+}
+
+@keyframes spray {
+  0%   { transform: translate(0,0) scale(1); opacity:0.9; }
+  100% { transform: translate(var(--sx),var(--sy)) scale(0); opacity:0; }
+}
+
+@keyframes seagull-flap {
+  0%,100% { transform: translateY(0) scaleY(1); }
+  50%      { transform: translateY(-6px) scaleY(0.85); }
+}
+
+@keyframes seagull-drift {
+  from { transform: translateX(-200px); }
+  to   { transform: translateX(calc(100vw + 200px)); }
+}
+
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-ocean { height: 160px !important; }
+  .hero-content { padding-bottom: 180px !important; }
+}
+
+@media (max-width: 480px) {
+  .hero-ocean { height: 130px !important; }
+  .hero-content { padding-bottom: 150px !important; padding-left: 16px !important; padding-right: 16px !important; }
+}
