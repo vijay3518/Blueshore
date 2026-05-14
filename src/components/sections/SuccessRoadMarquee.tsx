@@ -8,25 +8,25 @@ const SUCCESS_CLIPS = [
     id: 1, 
     title: "Strategic Audit", 
     video: "https://player.vimeo.com/external/403209357.sd.mp4?s=8435d8866509f6e1f37e408544e31e5f085734e5&profile_id=139", 
-    poster: "https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&q=80&w=1200" 
+    poster: "/images/marquee_audit.png" 
   },
   { 
     id: 2, 
     title: "Profile Mapping", 
     video: "https://player.vimeo.com/external/370331493.sd.mp4?s=338d350a237583fc003d6d027b6f68c3&profile_id=139", 
-    poster: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200" 
+    poster: "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?auto=format&fit=crop&q=80&w=1200" 
   },
   { 
     id: 3, 
     title: "Admission Victory", 
     video: "https://player.vimeo.com/external/450371454.sd.mp4?s=f52097e387c2688009d73d2a33c16641&profile_id=139", 
-    poster: "https://images.unsplash.com/photo-1523050853053-f69449019d53?auto=format&fit=crop&q=80&w=1200" 
+    poster: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1200" 
   },
   { 
     id: 4, 
     title: "Visa Command", 
     video: "https://player.vimeo.com/external/482613045.sd.mp4?s=40428d0e74b5c777d12a76f281e05d050519302e&profile_id=139", 
-    poster: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1200" 
+    poster: "https://images.unsplash.com/photo-1569982175971-d92b01cf8694?auto=format&fit=crop&q=80&w=1200" 
   },
 ];
 

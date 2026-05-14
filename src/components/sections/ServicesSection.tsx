@@ -216,25 +216,16 @@ export function ServicesSection() {
               </MagneticButton>
             </div>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-4">
+            <div className="mt-12 grid grid-cols-3 gap-2 sm:gap-6 md:grid-cols-3">
               {[
-                { n: "01", t: "Discover", d: "Profile + goals + constraints" },
-                { n: "02", t: "Design", d: "Shortlist + timeline + costs" },
-                { n: "03", t: "Build", d: "Applications + SOP/LOR/CV" },
-                { n: "04", t: "Launch", d: "Visa + pre-departure plan" },
+                { n: "01", t: "CLARITY" },
+                { n: "02", t: "FIT" },
+                { n: "03", t: "PROOF" },
               ].map((s, i) => (
                 <RevealOnScroll key={s.n} delay={i * 0.1} direction="up" className="h-full">
-                  <div className="h-full rounded-3xl border border-slate-50 bg-[#f8fbff] p-6 hover:bg-white hover:shadow-xl transition-all duration-500 group">
-                    <div className="flex items-center justify-between">
-                      <span className="font-display text-2xl sm:text-3xl font-black text-[#f4a800] opacity-40 group-hover:opacity-100 transition-opacity">{s.n}</span>
-                      <div className="h-12 w-12 rounded-full bg-[#1565c0]/10 flex items-center justify-center text-[#1565c0] group-hover:rotate-[360deg] transition-transform duration-700">
-                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <p className="mt-6 text-base font-black text-[#0a1f5c]">{s.t}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-500">{s.d}</p>
+                  <div className="flex flex-col justify-center h-full border-l-[3px] sm:border-l-[4px] border-[#1f7373] bg-white p-3 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                    <span className="font-display text-xl sm:text-4xl font-black text-[#05162e]">{s.n}</span>
+                    <p className="mt-2 sm:mt-6 text-[8px] sm:text-xs font-black tracking-[0.2em] text-[#1f7373] uppercase">{s.t}</p>
                   </div>
                 </RevealOnScroll>
               ))}

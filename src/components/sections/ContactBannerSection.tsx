@@ -2,6 +2,7 @@
 
 import { hash01 } from "@/lib/hash01";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useMemo, useState } from "react";
 
 const DESTINATIONS = [
@@ -29,14 +30,23 @@ export function ContactBannerSection() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-28 overflow-hidden bg-bs-navy px-4 py-24 text-white sm:px-8 lg:px-12"
+      className="relative scroll-mt-28 overflow-hidden px-4 py-24 text-white sm:px-8 lg:px-12"
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1440 120%27%3E%3Cpath fill=%27%23F4A800%27 fill-opacity=%270.35%27 d=%27M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z%27/%3E%3C/svg%3E')] bg-cover bg-top"
-        aria-hidden
-      />
+      {/* Cinematic Background Image */}
+      <div className="absolute inset-0 -z-20">
+        <Image
+          src="/images/contact_bg.png"
+          alt="Premium University Architecture"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
+      
+      {/* Deep Navy Contrast Overlay */}
+      <div className="absolute inset-0 -z-10 bg-[#07111f]/85" />
 
-      <div className="relative mx-auto max-w-5xl text-center">
+      <div className="relative z-10 mx-auto max-w-5xl text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.28em] text-bs-gold">
           Contact BlueShore
         </p>
