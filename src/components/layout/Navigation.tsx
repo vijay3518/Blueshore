@@ -1,6 +1,7 @@
 "use client";
 
 import { Logo } from "@/components/brand/Logo";
+import { MagneticButton } from "@/components/sections/AnimationKit";
 import { NAV_LINKS } from "@/lib/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -16,6 +17,7 @@ const SECTION_IDS = NAV_LINKS.map((l) => navHrefToSectionId(l.href));
 export function Navigation() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -45,12 +47,23 @@ export function Navigation() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  useEffect(() => {
+    const updateScrolled = () => setScrolled(window.scrollY > 24);
+
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, []);
+
   const underlineLayoutId = useMemo(() => "nav-underline", []);
 
   return (
     <>
       <motion.header
-        className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white shadow-sm"
+        className={`fixed inset-x-0 top-0 z-50 border-b bg-white transition-colors duration-300 ${
+          scrolled ? "border-slate-200 shadow-sm" : "border-transparent shadow-none"
+        }`}
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{
@@ -67,7 +80,7 @@ export function Navigation() {
             className="shrink-0"
             aria-label="BlueShore Overseas home"
           >
-            <Logo />
+            <Logo inverted={false} />
           </Link>
 
           <ul className="relative hidden items-center gap-3 lg:flex">
@@ -83,7 +96,7 @@ export function Navigation() {
                     className={`relative px-1 py-2 text-xs font-black uppercase tracking-[0.16em] transition-colors ${
                       isActive
                         ? "text-[#c68b20]"
-                        : "text-[#07111f]/70 hover:text-[#07111f]"
+                        : "text-[#07111f] hover:text-[#c68b20]"
                     }`}
                   >
                     {link.label}
@@ -106,12 +119,14 @@ export function Navigation() {
           </ul>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/#contact"
-              className="hidden bg-[#f4a800] px-4 py-2 text-sm font-black text-[#07111f] shadow-md transition hover:bg-[#ffc53d] md:inline-flex"
-            >
-              Get Free Counselling
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/#contact"
+                className="hidden bg-[#f4a800] px-5 py-2.5 text-sm font-black text-[#07111f] shadow-xl transition hover:bg-[#ffc53d] md:inline-flex"
+              >
+                Get Free Counselling
+              </Link>
+            </MagneticButton>
 
             <button
               type="button"

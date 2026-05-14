@@ -4,6 +4,12 @@ import { hash01 } from "@/lib/hash01";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { 
+  RevealOnScroll, 
+  SplitTextReveal, 
+  StaggerCards, 
+  CountUp 
+} from "./AnimationKit";
 
 const TESTIMONIALS = [
   {
@@ -71,32 +77,6 @@ function ConfettiBurst({ active }: { active: boolean }) {
   );
 }
 
-function CountUp({ end, suffix = "" }: { end: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10%" });
-  const [val, setVal] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    const duration = 1800;
-    const start = performance.now();
-    const tick = (now: number) => {
-      const p = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(Math.floor(eased * end));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [inView, end]);
-
-  return (
-    <span ref={ref}>
-      {val.toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
-
 export function SuccessStoriesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const stampDone = useInView(sectionRef, { once: true, margin: "-15%" });
@@ -113,10 +93,10 @@ export function SuccessStoriesSection() {
     <section
       ref={sectionRef}
       id="success"
-      className="relative scroll-mt-28 overflow-hidden bg-slate-50 px-4 py-24 sm:px-8 lg:px-12"
+      className="relative scroll-mt-28 overflow-hidden bg-white px-4 py-28 sm:px-8 lg:px-12"
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cpath fill='%230A1F5C' d='M120 300c80-40 160-30 240 0s160 40 240 10'/%3E%3C/svg%3E\")",
@@ -126,86 +106,98 @@ export function SuccessStoriesSection() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-6xl">
-        <div className="relative flex min-h-[180px] flex-col items-center justify-center">
+      <div className="relative mx-auto max-w-7xl">
+        <div className="relative flex min-h-[200px] flex-col items-center justify-center">
           <ConfettiBurst active={burst} />
 
           <motion.div
-            initial={{ scale: 4, opacity: 0, rotate: -12 }}
+            initial={{ scale: 5, opacity: 0, rotate: -20, filter: "blur(20px)" }}
             animate={
               stampDone
                 ? {
-                    scale: [4, 0.92, 1.06, 0.97, 1],
+                    scale: [5, 0.9, 1.1, 0.98, 1],
                     opacity: [0, 1, 1, 1, 1],
-                    rotate: [-12, -5, -2.5, -3.5, -3],
+                    rotate: [-20, -5, -2, -3.5, -3],
+                    filter: ["blur(20px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)"],
                   }
-                : { scale: 4, opacity: 0, rotate: -12 }
+                : {}
             }
             transition={{
-              duration: 0.65,
-              times: [0, 0.32, 0.52, 0.75, 1],
+              duration: 0.8,
+              times: [0, 0.3, 0.5, 0.7, 1],
               ease: [0.34, 1.56, 0.64, 1],
             }}
-            className="relative z-10 rounded-2xl border-4 border-[#c62828] bg-[#ffebee] px-8 py-5 shadow-xl sm:px-10 sm:py-6"
+            className="relative z-10 rounded-2xl border-[6px] border-[#c62828] bg-white px-10 py-6 shadow-[0_40px_100px_-20px_rgba(198,40,40,0.2)] sm:px-14 sm:py-8"
           >
-            <p className="text-center font-display text-xl font-black uppercase tracking-[0.12em] text-[#b71c1c] sm:text-3xl sm:tracking-[0.2em]">
+            <p className="text-center font-display text-2xl font-black uppercase tracking-[0.2em] text-[#b71c1c] sm:text-4xl">
               VISA APPROVED
             </p>
+            {/* Subtle texture for the stamp */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
           </motion.div>
         </div>
 
-        <div className="mt-12 text-center">
-          <p className="font-display text-4xl font-semibold text-bs-navy sm:text-5xl">
-            <CountUp end={10247} suffix="" /> Visas Approved
-          </p>
-          <p className="mt-2 text-sm text-slate-600">
-            Milestones powered by meticulous counselling and embassy-ready narratives.
-          </p>
+        <div className="mt-16 text-center">
+          <div className="flex flex-col items-center justify-center">
+             <div className="font-display text-5xl font-black text-[#0a1f5c] sm:text-7xl flex items-baseline gap-4">
+                <CountUp to={10247} className="tabular-nums" />
+                <span className="text-2xl font-bold text-[#f4a800] uppercase tracking-widest">+</span>
+             </div>
+             <p className="mt-4 text-xl font-bold text-[#0a1f5c] uppercase tracking-[0.4em]">Visas Secured</p>
+          </div>
+          
+          <RevealOnScroll delay={0.3} direction="up">
+            <p className="mt-6 text-lg text-slate-500 max-w-2xl mx-auto">
+              Milestones powered by meticulous counselling and embassy-ready narratives. Join the ranks of successful global students.
+            </p>
+          </RevealOnScroll>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-3">
-          {TESTIMONIALS.map((t, idx) => (
-            <motion.article
+        <StaggerCards className="mt-20 grid gap-8 lg:grid-cols-3">
+          {TESTIMONIALS.map((t) => (
+            <div
               key={t.name}
-              initial={false}
-              animate={
-                stampDone
-                  ? { opacity: 1, x: 0 }
-                  : { opacity: 0, x: idx % 2 === 0 ? -56 : 56 }
-              }
-              transition={{
-                duration: 0.65,
-                delay: stampDone ? 0.48 + idx * 0.14 : 0,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/60"
+              data-stagger-card
+              className="flex flex-col rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-[0_30px_70px_-20px_rgba(10,31,92,0.1)] hover:shadow-[0_50px_90px_-20px_rgba(10,31,92,0.15)] transition-all duration-500 hover:-translate-y-2 group"
             >
-              <div className="flex items-center gap-4">
-                <Image
-                  src={t.img}
-                  alt={`Portrait of ${t.name}`}
-                  width={72}
-                  height={72}
-                  className="h-16 w-16 rounded-full object-cover ring-2 ring-bs-gold/60"
-                  loading="lazy"
-                />
+              <div className="flex items-center gap-5">
+                <div className="relative">
+                  <Image
+                    src={t.img}
+                    alt={`Portrait of ${t.name}`}
+                    width={80}
+                    height={80}
+                    className="h-20 w-20 rounded-full object-cover ring-4 ring-[#f4a800]/20 group-hover:ring-[#f4a800]/40 transition-all duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute -bottom-1 -right-1 bg-[#1565c0] text-white p-1.5 rounded-full shadow-lg">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z" />
+                    </svg>
+                  </div>
+                </div>
                 <div className="text-left">
-                  <p className="font-semibold text-bs-navy">{t.name}</p>
-                  <p className="text-xs uppercase tracking-wide text-bs-ocean">{t.country}</p>
-                  <p className="text-xs text-slate-500">{t.uni}</p>
+                  <p className="text-lg font-black text-[#0a1f5c]">{t.name}</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#1565c0]">{t.country}</p>
+                  <p className="text-xs text-slate-400 font-medium">{t.uni}</p>
                 </div>
               </div>
-              <div className="mt-4 flex gap-1 text-bs-gold">
+              
+              <div className="mt-8 flex gap-1.5 text-[#f4a800]">
                 {Array.from({ length: t.rating }).map((_, i) => (
-                  <span key={i} aria-hidden>
-                    ★
-                  </span>
+                  <span key={i} className="text-lg">★</span>
                 ))}
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-slate-600">&ldquo;{t.quote}&rdquo;</p>
-            </motion.article>
+              
+              <div className="mt-6 relative">
+                <span className="absolute -top-4 -left-2 text-6xl text-[#1565c0]/10 font-serif">“</span>
+                <p className="relative z-10 text-base leading-relaxed text-slate-600 italic">
+                  {t.quote}
+                </p>
+              </div>
+            </div>
           ))}
-        </div>
+        </StaggerCards>
       </div>
     </section>
   );

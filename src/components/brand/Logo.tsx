@@ -1,13 +1,15 @@
 
-
 type LogoProps = {
   className?: string;
   variant?: "full" | "emblem";
-  /** Kept for existing call sites; switches text for dark footer/menu usage. */
+  /** Kept for existing call sites; switches wordmark text colour for dark backgrounds. */
   inverted?: boolean;
   /** Larger mark for footer / hero */
   size?: "nav" | "hero" | "footer";
 };
+
+/** Transparent-background version of the mark (generated from blueshore-logo-full.png). */
+const LOGO_SRC = "/images/blueshore-logo-transparent.png";
 
 export function Logo({
   className = "",
@@ -15,72 +17,48 @@ export function Logo({
   inverted = false,
   size = "nav",
 }: LogoProps) {
-  if (variant === "emblem") {
-    return (
-      <div
-        className={`relative shrink-0 overflow-hidden rounded-xl bg-white/95 p-1.5 shadow-md shadow-black/15 ring-1 ring-white/25 ${className}`}
-        style={{
-          width: size === "hero" ? 56 : 44,
-          height: size === "hero" ? 56 : 44,
-        }}
-      >
+  /* ── Size tokens ────────────────────────────────────────────────── */
+  const isHeroOrFooter = size === "footer" || size === "hero";
+  
+  const emblemSize = isHeroOrFooter ? "h-20 w-20" : "h-12 w-12 sm:h-14 sm:w-14";
+  
+  const wordmarkSize = isHeroOrFooter ? "text-4xl" : "text-2xl sm:text-3xl";
+  
+  const overseasSize = isHeroOrFooter 
+    ? "text-base tracking-[0.5em]" 
+    : "text-[11px] tracking-[0.4em] sm:text-xs";
+
+  const content = (
+    <>
+      {/* Actual logo mark (the "B" emblem) */}
+      <div className={`relative shrink-0 transition-transform duration-500 hover:scale-110 ${emblemSize}`}>
         <img
-          src="images/blueshore-logo-full.png"
-          alt=""
-    
-          sizes="64px"
-          className="object-contain"
-        
+          src={LOGO_SRC}
+          alt="BlueShore Emblem"
+          className="h-full w-full object-contain filter drop-shadow-lg"
         />
       </div>
-    );
-  }
 
-  const markDims =
-    size === "footer"
-      ? "relative h-24 w-28"
-      : size === "hero"
-        ? "relative h-24 w-28"
-        : "relative h-12 w-14 sm:h-14 sm:w-16";
-
-  const wordmarkSize =
-    size === "footer"
-      ? "text-4xl"
-      : size === "hero"
-        ? "text-4xl"
-        : "text-2xl sm:text-3xl";
-
-  const overseasSize =
-    size === "footer"
-      ? "text-sm tracking-[0.44em]"
-      : size === "hero"
-        ? "text-sm tracking-[0.44em]"
-        : "text-[10px] tracking-[0.36em] sm:text-xs";
+      {variant === "full" && (
+        <div className="leading-none select-none" aria-label="BlueShore Overseas">
+          <div className={`${wordmarkSize} font-display font-bold tracking-tight`}>
+            <span className={inverted ? "text-white" : "text-[#0a1f5c]"}>Blue</span>
+            <span className="text-[#1565c0]">Shore</span>
+          </div>
+          <div className={`mt-1.5 font-black uppercase text-[#c68b20] ${overseasSize}`}>
+            Overseas
+          </div>
+        </div>
+      )}
+    </>
+  );
 
   return (
     <div
       data-inverted={inverted || undefined}
-      className={`flex shrink-0 items-center gap-2.5 ${className}`}
+      className={`flex shrink-0 items-center gap-3 ${className}`}
     >
-      <div className={markDims}>
-        <img
-          src="images/blueshore-logo-full.png"
-          alt=""
-          
-          sizes="(max-width: 640px) 64px, 112px"
-          className="object-contain"
-          
-        />
-      </div>
-      <div className="leading-none" aria-label="BlueShore Overseas">
-        <div className={`${wordmarkSize} font-display font-semibold tracking-normal`}>
-          <span className={inverted ? "text-white" : "text-[#15265f]"}>Blue</span>
-          <span className="text-[#1687d9]">Shore</span>
-        </div>
-        <div className={`mt-1 font-black uppercase text-[#c68b20] ${overseasSize}`}>
-          Overseas
-        </div>
-      </div>
+      {content}
     </div>
   );
-} 
+}

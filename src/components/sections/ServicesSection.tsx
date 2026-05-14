@@ -1,8 +1,13 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { useMemo } from "react";
+import { 
+  RevealOnScroll, 
+  SplitTextReveal, 
+  StaggerCards, 
+  MagneticButton 
+} from "./AnimationKit";
 
 const SERVICES = [
   {
@@ -52,18 +57,6 @@ const SERVICES = [
   },
 ];
 
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
-};
-
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 20 20" className="h-5 w-5" aria-hidden>
@@ -87,31 +80,35 @@ function ServiceCard({
   highlight: string;
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_20px_55px_-35px_rgba(2,8,31,0.35)] transition hover:-translate-y-1 hover:border-bs-gold/60">
+    <div data-stagger-card className="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_24px_80px_-40px_rgba(2,8,31,0.25)] transition-all duration-500 hover:shadow-[0_48px_100px_-30px_rgba(2,8,31,0.3)] hover:-translate-y-2 hover:border-[#1565c0]/30">
       <div
-        className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-bs-sky/10 blur-2xl transition group-hover:bg-bs-gold/10"
+        className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[#1565c0]/5 blur-3xl transition group-hover:bg-[#f4a800]/10"
         aria-hidden
       />
-      <div className="flex items-start gap-4">
-        <div className="shrink-0 rounded-2xl bg-slate-50 p-3 ring-1 ring-slate-100">
+      <div className="flex flex-col gap-6">
+        <div className="shrink-0 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-100 w-fit">
           {icon}
         </div>
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-bs-ocean/90">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1565c0]">
             {highlight}
           </p>
-          <h3 className="mt-2 font-display text-xl font-semibold text-bs-navy">{title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">{desc}</p>
+          <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold text-[#0a1f5c]">{title}</h3>
+          <p className="mt-4 text-base leading-relaxed text-slate-600">{desc}</p>
         </div>
       </div>
-      <div className="mt-6 flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 text-sm font-semibold text-bs-navy/80">
+      <div className="mt-8 flex items-center justify-between border-t border-slate-50 pt-6">
+        <span className="inline-flex items-center gap-3 text-sm font-black text-[#0a1f5c]">
           Learn more
-          <span className="text-bs-ocean transition group-hover:translate-x-0.5">
+          <span className="text-[#1565c0] transition group-hover:translate-x-1">
             <ArrowIcon />
           </span>
         </span>
-        <span className="h-9 w-9 rounded-full border border-slate-200 bg-white/80" aria-hidden />
+        <div className="h-10 w-10 rounded-full bg-slate-50 flex items-center justify-center text-[#1565c0] group-hover:bg-[#1565c0] group-hover:text-white transition-colors duration-500">
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+             <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
       </div>
     </div>
   );
@@ -126,107 +123,124 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="relative scroll-mt-28 bg-gradient-to-b from-white via-slate-50 to-white px-4 py-24 sm:px-8 lg:px-12"
+      className="relative scroll-mt-28 bg-gradient-to-b from-white via-slate-50/50 to-white px-4 py-28 sm:px-8 lg:px-12"
     >
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-[radial-gradient(circle_at_30%_20%,rgba(33,150,243,0.14),transparent_55%),radial-gradient(circle_at_75%_10%,rgba(244,168,0,0.10),transparent_50%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(circle_at_30%_20%,rgba(21,101,192,0.08),transparent_70%),radial-gradient(circle_at_75%_10%,rgba(244,168,0,0.06),transparent_60%)]"
         aria-hidden
       />
-      <div className="mx-auto max-w-6xl">
-        <div className="grid items-start gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
-          <div className="text-left">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-bs-ocean">
-              Services
-            </p>
-            <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold text-bs-navy sm:text-4xl">
-              Built like a consultancy. Delivered like a mentor.
-            </h2>
-            <p className="mt-4 max-w-xl text-sm text-slate-600 sm:text-base">
-              We don’t sell “packages.” We design a decision-ready plan—university fit, documentation quality, and visa
-              strategy—so every step increases your odds.
-            </p>
+      <div className="mx-auto max-w-7xl">
+        <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <div className="text-left relative z-10">
+            <RevealOnScroll direction="left">
+              <p className="text-sm font-black uppercase tracking-[0.3em] text-[#1565c0]">
+                Our Expertise
+              </p>
+            </RevealOnScroll>
+            
+            <div className="mt-6">
+              <SplitTextReveal 
+                text="Built like a consultancy. Delivered like a mentor." 
+                className="max-w-xl font-display text-3xl font-bold leading-tight text-[#0a1f5c] sm:text-4xl lg:text-5xl"
+              />
+            </div>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <RevealOnScroll delay={0.2} direction="up">
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                We don’t sell “packages.” We design a decision-ready plan—university fit, documentation quality, and visa
+                strategy—so every step increases your odds.
+              </p>
+            </RevealOnScroll>
+
+            <div className="mt-12 grid gap-4 sm:grid-cols-2">
               {[
                 { k: "Profile evaluation", v: "Clear strengths, gaps, and target range" },
                 { k: "Shortlisting", v: "3 tiers: safe / match / ambitious" },
                 { k: "Application build", v: "SOP, LOR, CV, and timelines" },
                 { k: "Visa readiness", v: "Docs, finances, and mock interview" },
-              ].map((x) => (
-                <div
-                  key={x.k}
-                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">{x.k}</p>
-                  <p className="mt-2 text-sm font-semibold text-bs-navy/90">{x.v}</p>
-                </div>
+              ].map((x, i) => (
+                <RevealOnScroll key={x.k} delay={0.3 + i * 0.1} direction="up">
+                  <div className="h-full rounded-2xl border border-slate-100 bg-white p-5 shadow-sm hover:shadow-md transition-shadow group">
+                    <p className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400 group-hover:text-[#1565c0] transition-colors">{x.k}</p>
+                    <p className="mt-3 text-sm font-bold text-[#0a1f5c]">{x.v}</p>
+                  </div>
+                </RevealOnScroll>
               ))}
             </div>
 
-            <Link
-              href="/#contact"
-              className="mt-9 inline-flex items-center justify-center rounded-full bg-bs-gold px-7 py-3.5 text-sm font-bold text-bs-navy shadow-[0_16px_44px_rgba(244,168,0,0.28)] transition hover:-translate-y-0.5 hover:bg-[#ffc845]"
-            >
-              Get a free strategy call
-            </Link>
-          </div>
-
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid gap-5 sm:grid-cols-2"
-          >
-            {SERVICES.map((s, idx) => (
-              <motion.div key={s.title} variants={item}>
-                <ServiceCard
-                  icon={s.icon}
-                  title={s.title}
-                  desc={s.desc}
-                  highlight={highlights[idx] ?? "Service"}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
-        <div className="mt-14 rounded-3xl border border-slate-200 bg-white p-7 shadow-[0_20px_55px_-35px_rgba(2,8,31,0.35)]">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
-                The BlueShore DNA
-              </p>
-              <p className="mt-2 max-w-2xl font-display text-2xl font-semibold text-bs-navy">
-                A repeatable system that keeps you on-track—deadlines, docs, and decisions.
-              </p>
+            <div className="mt-12 flex flex-col sm:flex-row">
+              <MagneticButton className="w-full sm:w-auto">
+                <Link
+                  href="/#contact"
+                  className="inline-flex w-full items-center justify-center bg-[#0a1f5c] px-10 py-5 text-sm font-black text-white transition hover:bg-[#1565c0] shadow-2xl shadow-[#0a1f5c]/20"
+                >
+                  Get a free strategy call
+                </Link>
+              </MagneticButton>
             </div>
-            <Link
-              href="/#destinations"
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-6 py-3 text-sm font-bold text-bs-navy transition hover:-translate-y-0.5 hover:bg-white"
-            >
-              See destinations
-            </Link>
           </div>
 
-          <div className="mt-7 grid gap-4 md:grid-cols-4">
-            {[
-              { n: "01", t: "Discover", d: "Profile + goals + constraints" },
-              { n: "02", t: "Design", d: "Shortlist + timeline + costs" },
-              { n: "03", t: "Build", d: "Applications + SOP/LOR/CV" },
-              { n: "04", t: "Launch", d: "Visa + pre-departure plan" },
-            ].map((s) => (
-              <div key={s.n} className="rounded-2xl border border-slate-200 bg-white p-5">
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-2xl font-semibold text-bs-gold">{s.n}</span>
-                  <span className="h-10 w-10 rounded-full bg-bs-sky/10" aria-hidden />
-                </div>
-                <p className="mt-3 text-sm font-semibold text-bs-navy">{s.t}</p>
-                <p className="mt-1 text-sm text-slate-600">{s.d}</p>
-              </div>
+          <StaggerCards className="grid gap-6 sm:grid-cols-2 relative z-10">
+            {SERVICES.map((s, idx) => (
+              <ServiceCard
+                key={s.title}
+                icon={s.icon}
+                title={s.title}
+                desc={s.desc}
+                highlight={highlights[idx] ?? "Service"}
+              />
             ))}
-          </div>
+          </StaggerCards>
         </div>
+
+        <RevealOnScroll direction="up" className="mt-20">
+          <div className="rounded-[3rem] border border-slate-100 bg-white p-8 sm:p-12 shadow-[0_40px_100px_-30px_rgba(2,8,31,0.15)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#1565c0]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between relative z-10">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-[#1565c0]">
+                  The BlueShore DNA
+                </p>
+                <h3 className="mt-4 max-w-2xl font-display text-2xl font-bold text-[#0a1f5c] sm:text-3xl lg:text-4xl">
+                  A repeatable system that keeps you on-track—deadlines, docs, and decisions.
+                </h3>
+              </div>
+              <MagneticButton className="w-full sm:w-auto">
+                <Link
+                  href="/#destinations"
+                  className="inline-flex w-full sm:w-auto items-center justify-center border-2 border-slate-200 bg-white px-8 py-4 text-sm font-black text-[#0a1f5c] transition hover:border-[#1565c0] hover:text-[#1565c0]"
+                >
+                  See destinations
+                </Link>
+              </MagneticButton>
+            </div>
+
+            <div className="mt-12 grid gap-6 md:grid-cols-4">
+              {[
+                { n: "01", t: "Discover", d: "Profile + goals + constraints" },
+                { n: "02", t: "Design", d: "Shortlist + timeline + costs" },
+                { n: "03", t: "Build", d: "Applications + SOP/LOR/CV" },
+                { n: "04", t: "Launch", d: "Visa + pre-departure plan" },
+              ].map((s, i) => (
+                <RevealOnScroll key={s.n} delay={i * 0.1} direction="up" className="h-full">
+                  <div className="h-full rounded-3xl border border-slate-50 bg-[#f8fbff] p-6 hover:bg-white hover:shadow-xl transition-all duration-500 group">
+                    <div className="flex items-center justify-between">
+                      <span className="font-display text-2xl sm:text-3xl font-black text-[#f4a800] opacity-40 group-hover:opacity-100 transition-opacity">{s.n}</span>
+                      <div className="h-12 w-12 rounded-full bg-[#1565c0]/10 flex items-center justify-center text-[#1565c0] group-hover:rotate-[360deg] transition-transform duration-700">
+                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p className="mt-6 text-base font-black text-[#0a1f5c]">{s.t}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-500">{s.d}</p>
+                  </div>
+                </RevealOnScroll>
+              ))}
+            </div>
+          </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

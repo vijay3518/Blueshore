@@ -40,7 +40,7 @@ export function ContactBannerSection() {
         <p className="text-sm font-semibold uppercase tracking-[0.28em] text-bs-gold">
           Contact BlueShore
         </p>
-        <h2 className="mt-4 font-display text-3xl font-semibold sm:text-4xl">
+        <h2 className="mt-4 font-display text-2xl font-semibold sm:text-3xl lg:text-4xl">
           Your Global Journey Starts Today
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-sm text-white/75 sm:text-base">
@@ -70,7 +70,7 @@ export function ContactBannerSection() {
                   />
                 </svg>
               </div>
-              <p className="font-display text-2xl font-semibold">
+              <p className="font-display text-xl font-semibold sm:text-2xl">
                 Thank you—your counsellor will reach out shortly.
               </p>
               <ConfettiMini />
