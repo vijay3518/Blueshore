@@ -27,7 +27,7 @@ export function AboutSection() {
         <FloatingStar2D size={80} delay={2} />
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_0.85fr] lg:items-center relative z-10">
+      <div className="mx-auto grid max-w-7xlgap-16 lg:grid-cols-[1fr_0.85fr] lg:items-center relative z-10">
         <div>
           <RevealOnScroll direction="left">
             <p className="text-sm font-black uppercase tracking-[0.3em] text-[#1565c0]">
