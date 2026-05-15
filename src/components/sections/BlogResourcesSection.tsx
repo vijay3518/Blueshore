@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { BLOG_POSTS } from "@/lib/constants";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -80,9 +81,10 @@ export function BlogResourcesSection() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">{post.excerpt}</p>
                 <button
                   type="button"
-                  className="mt-6 inline-flex items-center text-sm font-semibold text-bs-ocean underline-offset-4 hover:underline"
+                  className="btn-fx mt-6 inline-flex w-fit items-center rounded-full px-1.5 py-1 text-sm font-semibold text-bs-ocean underline-offset-4 hover:underline"
                 >
-                  Read article
+                  <span className="btn-fx-content">Read article</span>
+                  <ButtonCelebration variant="wave" />
                 </button>
               </div>
             </motion.article>
@@ -98,9 +100,10 @@ export function BlogResourcesSection() {
                 setPosts((p) => [...p, ...EXTRA]);
                 setLoaded(true);
               }}
-              className="rounded-full bg-bs-navy px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-bs-navy/25 transition hover:bg-[#0d2a7a]"
+              className="btn-fx rounded-full bg-bs-navy px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-bs-navy/25 transition hover:bg-[#0d2a7a]"
             >
-              Load More
+              <span className="btn-fx-content">Load More</span>
+              <ButtonCelebration variant="confetti" />
             </motion.button>
           ) : (
             <p className="text-sm font-medium text-slate-500">You&apos;re caught up on insights.</p>

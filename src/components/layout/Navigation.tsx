@@ -1,6 +1,7 @@
 "use client";
 
 import { Logo } from "@/components/brand/Logo";
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { MagneticButton } from "@/components/sections/AnimationKit";
 import { NAV_LINKS } from "@/lib/constants";
 import { AnimatePresence, motion } from "framer-motion";
@@ -122,9 +123,10 @@ export function Navigation() {
             <MagneticButton>
               <Link
                 href="/#contact"
-                className="hidden bg-[#f4a800] px-5 py-2.5 text-sm font-black text-[#07111f] shadow-xl transition hover:bg-[#ffc53d] md:inline-flex"
+                className="btn-fx hidden bg-[#f4a800] px-5 py-2.5 text-sm font-black text-[#07111f] shadow-xl transition hover:bg-[#ffc53d] md:inline-flex"
               >
-                Get Free Counselling
+                <span className="btn-fx-content">Get Free Counselling</span>
+                <ButtonCelebration variant="confetti" />
               </Link>
             </MagneticButton>
 
@@ -211,10 +213,11 @@ export function Navigation() {
 
                 <Link
                   href="/#contact"
-                  className="mt-auto bg-[#f4a800] px-5 py-3 text-center text-base font-black text-[#07111f]"
+                  className="btn-fx mt-auto bg-[#f4a800] px-5 py-3 text-center text-base font-black text-[#07111f]"
                   onClick={() => setOpen(false)}
                 >
-                  Get Free Counselling
+                  <span className="btn-fx-content">Get Free Counselling</span>
+                  <ButtonCelebration variant="confetti" />
                 </Link>
               </div>
             </motion.nav>

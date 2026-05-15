@@ -4,22 +4,21 @@ import { Footer } from "@/components/layout/Footer";
 import { Navigation } from "@/components/layout/Navigation";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { ScrollToTopButton } from "@/components/layout/ScrollToTopButton";
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { StudentJourneySection } from "@/components/sections/StudentJourneySection";
 import { HeroCanvas } from "@/components/sections/HeroCanvas";
 import { BlueprintHeroSection } from "@/components/sections/BlueprintHeroSection";
 import { SuccessRoadMarquee } from "@/components/sections/SuccessRoadMarquee";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   RevealOnScroll, 
   SplitTextReveal, 
   CountUp, 
-  InfiniteMarquee,
   StaggerCards, 
   DrawLine,
   MagneticButton,
   WipeRevealSection,
   ParallaxLayer,
-  FloatingCap2D, 
   FloatingPlane2D, 
   FloatingStar2D,
   HeroTypewriter,
@@ -36,7 +35,6 @@ function SectionLabel({ children, tone = "dark" }: { children: React.ReactNode; 
 }
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 const heroStats = [
   { value: 10, suffix: "k+", label: "visa milestones" },
@@ -44,11 +42,55 @@ const heroStats = [
   { value: 4.9, suffix: "", label: "student rating" },
 ] as const;
 
-const universityPartners = [
-  "University of Oxford", "University of Toronto", "Monash University", 
-  "Technical University of Munich", "National University of Singapore", 
-  "University of Melbourne", "UCL London", "University of British Columbia"
-];
+const universityLogos = [
+  {
+    name: "University of Oxford",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/University_of_Oxford.svg",
+    width: 220,
+    mono: true,
+  },
+  {
+    name: "University of Toronto",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/59/UofT_Wordmark.png",
+    width: 220,
+    mono: true,
+  },
+  {
+    name: "Monash University",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Monash_University_logo.svg",
+    width: 210,
+    mono: true,
+  },
+  {
+    name: "Technical University of Munich",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c8/Logo_of_the_Technical_University_of_Munich.svg",
+    width: 180,
+    mono: true,
+  },
+  {
+    name: "National University of Singapore",
+    logo: "https://upload.wikimedia.org/wikipedia/en/9/9b/NationalUniversityofSingapore.svg",
+    width: 220,
+    mono: true,
+  },
+  {
+    name: "University of Melbourne",
+    logo: "https://upload.wikimedia.org/wikipedia/en/5/50/The_University_of_Melbourne_Logo.svg",
+    width: 190,
+    mono: false,
+  },
+  {
+    name: "UCL London",
+    wordmark: "UCL",
+    caption: "London",
+  },
+  {
+    name: "University of British Columbia",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/73/British_columbia_ca_univ_logo.svg",
+    width: 220,
+    mono: true,
+  },
+] as const;
 
 const serviceLanes = [
   {
@@ -139,6 +181,54 @@ function ArrowIcon() {
   );
 }
 
+type UniversityLogo = (typeof universityLogos)[number];
+
+function UniversityLogoTile({ university }: { university: UniversityLogo }) {
+  return (
+    <div className="group flex h-24 w-[260px] shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/[0.055] px-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition duration-300 hover:border-[#f4a800]/50 hover:bg-white/[0.09]">
+      {"logo" in university ? (
+        <Image
+          src={university.logo}
+          alt={`${university.name} logo`}
+          width={university.width}
+          height={72}
+          unoptimized
+          className={`h-auto max-h-12 w-auto max-w-full object-contain opacity-75 transition duration-300 group-hover:opacity-100 group-hover:drop-shadow-[0_0_18px_rgba(244,168,0,0.25)] ${
+            university.mono ? "brightness-0 invert" : ""
+          }`}
+        />
+      ) : (
+        <div className="flex flex-col items-center text-white/80 transition duration-300 group-hover:text-white">
+          <span className="text-4xl font-black leading-none tracking-[0.12em]">{university.wordmark}</span>
+          <span className="mt-1 text-[10px] font-black uppercase tracking-[0.32em] text-[#f4a800]/80">
+            {university.caption}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function UniversityLogoRow({ reverse = false }: { reverse?: boolean }) {
+  const repeatedLogos = [...universityLogos, ...universityLogos];
+
+  return (
+    <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
+      <div
+        className={`flex w-max gap-5 py-2 motion-reduce:animate-none ${
+          reverse
+            ? "animate-[marquee_44s_linear_infinite] [animation-direction:reverse]"
+            : "animate-[marquee_40s_linear_infinite]"
+        }`}
+      >
+        {repeatedLogos.map((university, index) => (
+          <UniversityLogoTile key={`${university.name}-${index}`} university={university} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -206,17 +296,21 @@ export default function Home() {
                 <MagneticButton className="w-full sm:w-auto">
                   <Link
                     href="/#contact"
-                    className="inline-flex w-full items-center justify-center gap-2 bg-[#f4a800] px-8 py-4 text-sm font-black text-[#07111f] transition hover:bg-[#ffd15a] shadow-xl shadow-black/20"
+                    className="btn-fx inline-flex w-full items-center justify-center bg-[#f4a800] px-8 py-4 text-sm font-black text-[#07111f] shadow-xl shadow-black/20 transition hover:bg-[#ffd15a]"
                   >
-                    Build my shortlist
-                    <ArrowIcon />
+                    <span className="btn-fx-content">
+                      Build my shortlist
+                      <ArrowIcon />
+                    </span>
+                    <ButtonCelebration variant="scholar" />
                   </Link>
                 </MagneticButton>
                 <Link
                   href="/#services"
-                  className="inline-flex w-full sm:w-auto items-center justify-center border border-white/30 bg-white/10 px-8 py-4 text-sm font-black text-white backdrop-blur transition hover:bg-white/20"
+                  className="btn-fx inline-flex w-full items-center justify-center border border-white/30 bg-white/10 px-8 py-4 text-sm font-black text-white shadow-xl shadow-black/10 backdrop-blur transition hover:bg-white/20 sm:w-auto"
                 >
-                  Explore the method
+                  <span className="btn-fx-content">Explore the method</span>
+                  <ButtonCelebration variant="plane" />
                 </Link>
               </RevealOnScroll>
 
@@ -236,18 +330,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Marquee Partners */}
-        <section className="bg-white py-8 border-b border-slate-200">
-          <RevealOnScroll direction="up">
-            <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-6">
-              Empowering students for world-class institutions
-            </p>
-            <InfiniteMarquee 
-              items={universityPartners} 
-              className="py-2"
-              itemClassName="text-xl font-display font-semibold text-[#0a1f5c]/40 hover:text-[#0a1f5c] transition-colors cursor-default" 
-            />
-          </RevealOnScroll>
+        {/* University Logo Trust Strip */}
+        <section className="relative isolate overflow-hidden border-y border-[#f4a800]/20 bg-[#07111f] py-12 text-white sm:py-16">
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(115deg,#07111f_0%,#0a1f5c_52%,#0c6b6a_100%)]" />
+          <div className="absolute inset-x-0 top-0 h-px bg-[#f4a800]/50" />
+          <div className="absolute inset-x-0 bottom-0 h-px bg-white/10" />
+
+          <div className="space-y-8">
+            <UniversityLogoRow />
+            <RevealOnScroll direction="up">
+              <div className="mx-auto max-w-5xl px-4 py-5 text-center sm:px-8">
+                <p className="text-[10px] font-black uppercase tracking-[0.34em] text-[#f4a800]">
+                  Empowering students for world-class institutions
+                </p>
+                <h2 className="mx-auto mt-4 max-w-4xl font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+                  Global university ambition, guided with BlueShore clarity.
+                </h2>
+              </div>
+            </RevealOnScroll>
+            <UniversityLogoRow reverse />
+          </div>
         </section>
 
         <RevealOnScroll>
@@ -518,10 +620,13 @@ export default function Home() {
                 <MagneticButton>
                   <Link
                     href="/#contact"
-                    className="inline-flex w-fit items-center gap-3 border-2 border-[#07111f] px-8 py-4 text-sm font-black text-[#07111f] transition hover:bg-[#07111f] hover:text-white"
+                    className="btn-fx inline-flex w-fit items-center border-2 border-[#07111f] px-8 py-4 text-sm font-black text-[#07111f] transition hover:bg-[#07111f] hover:text-white"
                   >
-                    Ask for a roadmap
-                    <ArrowIcon />
+                    <span className="btn-fx-content">
+                      Ask for a roadmap
+                      <ArrowIcon />
+                    </span>
+                    <ButtonCelebration variant="confetti" />
                   </Link>
                 </MagneticButton>
               </RevealOnScroll>
@@ -658,11 +763,14 @@ export default function Home() {
 
                     <div className="mt-10 sm:col-span-2">
                       <MagneticButton className="w-full">
-                        <button type="submit" className="group relative flex w-full items-center justify-center gap-6 rounded-2xl bg-[#f4a800] py-6 text-xs font-black uppercase tracking-[0.4em] text-[#07111f] shadow-2xl transition hover:bg-white hover:scale-[1.01]">
-                          Generate Roadmap
-                          <svg className="h-4 w-4 transition-transform group-hover:translate-x-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                          </svg>
+                        <button type="submit" className="btn-fx group relative flex w-full items-center justify-center rounded-2xl bg-[#f4a800] py-6 text-xs font-black uppercase tracking-[0.4em] text-[#07111f] shadow-2xl transition hover:bg-white">
+                          <span className="btn-fx-content gap-6">
+                            Generate Roadmap
+                            <svg className="h-4 w-4 transition-transform group-hover:translate-x-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </span>
+                          <ButtonCelebration variant="passport" />
                         </button>
                       </MagneticButton>
                     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { DESTINATION_PINS, UNIVERSITY_ENTRIES } from "@/lib/constants";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -95,9 +96,10 @@ export function DestinationsSection() {
               <MagneticButton>
                 <Link
                   href="/#contact"
-                  className="inline-flex items-center justify-center bg-[#f4a800] px-10 py-5 text-sm font-black text-[#02081f] transition hover:bg-[#ffd15a] shadow-2xl shadow-[#f4a800]/20"
+                  className="btn-fx inline-flex items-center justify-center bg-[#f4a800] px-10 py-5 text-sm font-black text-[#02081f] shadow-2xl shadow-[#f4a800]/20 transition hover:bg-[#ffd15a]"
                 >
-                  Get a destination shortlist
+                  <span className="btn-fx-content">Get a destination shortlist</span>
+                  <ButtonCelebration variant="plane" />
                 </Link>
               </MagneticButton>
             </div>

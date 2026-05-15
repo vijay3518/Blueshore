@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { useCallback, useEffect, useState } from "react";
 
 const SHOW_AFTER_PX = 400;
@@ -41,12 +42,13 @@ export function ScrollToTopButton() {
     <button
       type="button"
       onClick={moveToTop}
-      className="group fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-[#0a1f5c]/92 shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md transition hover:scale-105 hover:border-bs-gold/50 hover:shadow-[0_16px_48px_rgba(244,168,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bs-gold/80 sm:bottom-8 sm:right-8"
+      className="btn-fx group fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-[#0a1f5c]/92 shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md transition hover:border-bs-gold/50 hover:shadow-[0_16px_48px_rgba(244,168,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bs-gold/80 sm:bottom-8 sm:right-8"
       aria-label="Move to top"
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center text-white transition group-hover:text-bs-gold">
+      <span className="btn-fx-content flex h-10 w-10 shrink-0 items-center justify-center text-white transition group-hover:text-bs-gold">
         <AeroplaneIcon />
       </span>
+      <ButtonCelebration variant="plane" />
     </button>
   );
 }

@@ -1,10 +1,11 @@
 "use client";
 
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useEffect, useState, type ReactNode } from "react";
-import { RevealOnScroll, MagneticButton, SplitTextReveal } from "./AnimationKit";
+import { useRef, useState } from "react";
+import { RevealOnScroll, MagneticButton } from "./AnimationKit";
 
 const BLUEPRINT_CARDS = [
   { id: 1, country: "gb", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=600", title: "UK G5 Roadmap", meta: "Russell Group Strategy" },
@@ -43,9 +44,12 @@ function Card({ card, index }: { card: typeof BLUEPRINT_CARDS[0]; index: number 
           sizes="260px" 
         />
         <div className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white/95 shadow-md backdrop-blur-md overflow-hidden border border-white/20">
-          <img 
-            src={`https://flagcdn.com/w80/${card.country}.png`} 
-            alt={card.country}
+          <Image
+            src={`https://flagcdn.com/w80/${card.country}.png`}
+            alt={`${card.country} flag`}
+            width={80}
+            height={60}
+            unoptimized
             className="h-full w-full object-cover"
           />
         </div>
@@ -122,10 +126,10 @@ export function BlueprintHeroSection() {
               <MagneticButton>
                 <Link 
                   href="/#contact"
-                  className="group relative flex h-16 items-center justify-center rounded-full bg-[#f4a800] px-12 text-sm font-black text-white transition hover:bg-[#d69300] shadow-[0_20px_50px_-10px_rgba(244,168,0,0.4)]"
+                  className="btn-fx group relative flex h-16 items-center justify-center rounded-full bg-[#f4a800] px-12 text-sm font-black text-white shadow-[0_20px_50px_-10px_rgba(244,168,0,0.4)] transition hover:bg-[#d69300]"
                 >
-                  <span className="relative z-10">Let's Go</span>
-                  <div className="absolute inset-0 rounded-full bg-white opacity-0 transition group-hover:opacity-10" />
+                  <span className="btn-fx-content">Let&apos;s Go</span>
+                  <ButtonCelebration variant="wave" />
                 </Link>
               </MagneticButton>
             </RevealOnScroll>

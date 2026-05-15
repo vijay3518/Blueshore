@@ -184,6 +184,379 @@ body {
   animation: step-ring-pulse 1.1s ease-out infinite;
 }
 
+/* Button celebration effects */
+.btn-fx {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateZ(0);
+  transform-origin: center;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.btn-fx:hover,
+.btn-fx:focus-visible {
+  transform: translateY(-2px) scale(1.015);
+}
+
+.btn-fx:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+.btn-fx::before {
+  content: "";
+  position: absolute;
+  inset: -120%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 62%
+  );
+  opacity: 0;
+  transform: translateX(-60%) rotate(12deg);
+}
+
+.btn-fx:hover::before,
+.btn-fx:focus-visible::before,
+.btn-fx:active::before {
+  animation: btn-fx-shine 900ms ease forwards;
+}
+
+.btn-fx-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.btn-fx-visual {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: inherit;
+  color: currentColor;
+  pointer-events: none;
+}
+
+.btn-fx-piece {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 7px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--fx-c, #f4a800);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+}
+
+.btn-fx:hover .btn-fx-piece,
+.btn-fx:focus-visible .btn-fx-piece,
+.btn-fx:active .btn-fx-piece {
+  animation: btn-fx-confetti 880ms cubic-bezier(0.17, 0.67, 0.25, 1.2) var(--fx-delay, 0ms) both;
+}
+
+.btn-fx-cap {
+  position: absolute;
+  left: 16%;
+  bottom: 18%;
+  width: 24px;
+  height: 15px;
+  background: #f4a800;
+  clip-path: polygon(50% 0, 100% 34%, 50% 70%, 0 34%);
+  opacity: 0;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.22));
+}
+
+.btn-fx-cap::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  top: 8px;
+  width: 10px;
+  height: 2px;
+  border-radius: 999px;
+  background: #07111f;
+  transform: rotate(35deg);
+}
+
+.btn-fx:hover .btn-fx-cap,
+.btn-fx:focus-visible .btn-fx-cap,
+.btn-fx:active .btn-fx-cap {
+  animation: btn-fx-cap-toss 950ms cubic-bezier(0.17, 0.67, 0.25, 1.18) both;
+}
+
+.btn-fx-student {
+  position: absolute;
+  bottom: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 9px 0 3px #f4a800;
+  opacity: 0;
+}
+
+.btn-fx-student--a {
+  left: 58%;
+}
+
+.btn-fx-student--b {
+  left: 70%;
+  box-shadow: 0 9px 0 3px #2196f3;
+}
+
+.btn-fx-student--c {
+  left: 82%;
+  box-shadow: 0 9px 0 3px #0c6b6a;
+}
+
+.btn-fx:hover .btn-fx-student,
+.btn-fx:focus-visible .btn-fx-student,
+.btn-fx:active .btn-fx-student {
+  animation: btn-fx-student-cheer 720ms ease-out 80ms both;
+}
+
+.btn-fx-stamp {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  border: 2px solid currentColor;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  opacity: 0;
+  transform: translateY(-50%) rotate(-13deg) scale(1.8);
+}
+
+.btn-fx:hover .btn-fx-stamp,
+.btn-fx:focus-visible .btn-fx-stamp,
+.btn-fx:active .btn-fx-stamp {
+  animation: btn-fx-stamp 680ms cubic-bezier(0.2, 1.4, 0.32, 1) both;
+}
+
+.btn-fx-visual--passport .btn-fx-piece {
+  top: 58%;
+}
+
+.btn-fx-plane {
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  opacity: 0;
+  transform: translateY(-50%) rotate(10deg);
+}
+
+.btn-fx-plane-trail {
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  width: 40%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, currentColor);
+  opacity: 0;
+}
+
+.btn-fx:hover .btn-fx-plane,
+.btn-fx:focus-visible .btn-fx-plane,
+.btn-fx:active .btn-fx-plane {
+  animation: btn-fx-plane-flight 900ms ease-out both;
+}
+
+.btn-fx:hover .btn-fx-plane-trail,
+.btn-fx:focus-visible .btn-fx-plane-trail,
+.btn-fx:active .btn-fx-plane-trail {
+  animation: btn-fx-plane-trail 900ms ease-out both;
+}
+
+.btn-fx-wave {
+  position: absolute;
+  left: -10%;
+  bottom: -60%;
+  width: 120%;
+  height: 82%;
+  border-radius: 46%;
+  opacity: 0;
+}
+
+.btn-fx-wave--a {
+  background: rgba(33, 150, 243, 0.22);
+}
+
+.btn-fx-wave--b {
+  bottom: -67%;
+  background: rgba(244, 168, 0, 0.18);
+}
+
+.btn-fx-wave--c {
+  bottom: -74%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.btn-fx:hover .btn-fx-wave,
+.btn-fx:focus-visible .btn-fx-wave,
+.btn-fx:active .btn-fx-wave {
+  animation: btn-fx-wave-rise 1050ms ease-out both;
+}
+
+.btn-fx:hover .btn-fx-wave--b,
+.btn-fx:focus-visible .btn-fx-wave--b,
+.btn-fx:active .btn-fx-wave--b {
+  animation-delay: 80ms;
+}
+
+.btn-fx:hover .btn-fx-wave--c,
+.btn-fx:focus-visible .btn-fx-wave--c,
+.btn-fx:active .btn-fx-wave--c {
+  animation-delay: 150ms;
+}
+
+@keyframes btn-fx-shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-62%) rotate(12deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(62%) rotate(12deg);
+  }
+}
+
+@keyframes btn-fx-confetti {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+  14% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(-50% + var(--fx-x, 0px)), calc(-50% + var(--fx-y, -50px)))
+      scale(1)
+      rotate(var(--fx-r, 180deg));
+  }
+}
+
+@keyframes btn-fx-cap-toss {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-12deg) scale(0.8);
+  }
+  12% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(118px, -58px, 0) rotate(390deg) scale(1.08);
+  }
+}
+
+@keyframes btn-fx-student-cheer {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.6);
+  }
+  32% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1);
+  }
+  58% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.9);
+  }
+}
+
+@keyframes btn-fx-stamp {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) rotate(-13deg) scale(1.85);
+  }
+  55% {
+    opacity: 0.95;
+    transform: translateY(-50%) rotate(-8deg) scale(0.9);
+  }
+  72% {
+    opacity: 0.9;
+    transform: translateY(-50%) rotate(-8deg) scale(1.04);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) rotate(-8deg) scale(1);
+  }
+}
+
+@keyframes btn-fx-plane-flight {
+  0% {
+    opacity: 0;
+    transform: translate3d(-18px, -50%, 0) rotate(12deg);
+  }
+  18%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(280px, -120%, 0) rotate(-8deg);
+  }
+}
+
+@keyframes btn-fx-plane-trail {
+  0% {
+    opacity: 0;
+    transform: translateX(-20%) scaleX(0.1);
+  }
+  38% {
+    opacity: 0.42;
+    transform: translateX(35%) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(145%) scaleX(0.3);
+  }
+}
+
+@keyframes btn-fx-wave-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(22%) rotate(0deg);
+  }
+  22% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-34%) rotate(10deg);
+  }
+}
+
 @keyframes stamp-impact {
   0% {
     transform: scale(4) rotate(-12deg);

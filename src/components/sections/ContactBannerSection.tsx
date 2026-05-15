@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { hash01 } from "@/lib/hash01";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -137,9 +138,10 @@ export function ContactBannerSection() {
               <div className="md:col-span-2 lg:col-span-1">
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-bs-gold px-6 py-4 text-base font-semibold text-bs-navy shadow-xl shadow-black/30 transition hover:bg-[#ffc53d] lg:whitespace-nowrap"
+                  className="btn-fx w-full rounded-full bg-bs-gold px-6 py-4 text-base font-semibold text-bs-navy shadow-xl shadow-black/30 transition hover:bg-[#ffc53d] lg:whitespace-nowrap"
                 >
-                  Get Free Counselling
+                  <span className="btn-fx-content">Get Free Counselling</span>
+                  <ButtonCelebration variant="confetti" />
                 </button>
               </div>
             </div>

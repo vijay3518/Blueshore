@@ -1,5 +1,6 @@
 "use client";
 
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import Link from "next/link";
 import { useMemo } from "react";
 import { 
@@ -172,9 +173,10 @@ export function ServicesSection() {
               <MagneticButton className="w-full sm:w-auto">
                 <Link
                   href="/#contact"
-                  className="inline-flex w-full items-center justify-center bg-[#0a1f5c] px-10 py-5 text-sm font-black text-white transition hover:bg-[#1565c0] shadow-2xl shadow-[#0a1f5c]/20"
+                  className="btn-fx inline-flex w-full items-center justify-center bg-[#0a1f5c] px-10 py-5 text-sm font-black text-white shadow-2xl shadow-[#0a1f5c]/20 transition hover:bg-[#1565c0]"
                 >
-                  Get a free strategy call
+                  <span className="btn-fx-content">Get a free strategy call</span>
+                  <ButtonCelebration variant="confetti" />
                 </Link>
               </MagneticButton>
             </div>
@@ -209,9 +211,10 @@ export function ServicesSection() {
               <MagneticButton className="w-full sm:w-auto">
                 <Link
                   href="/#destinations"
-                  className="inline-flex w-full sm:w-auto items-center justify-center border-2 border-slate-200 bg-white px-8 py-4 text-sm font-black text-[#0a1f5c] transition hover:border-[#1565c0] hover:text-[#1565c0]"
+                  className="btn-fx inline-flex w-full items-center justify-center border-2 border-slate-200 bg-white px-8 py-4 text-sm font-black text-[#0a1f5c] transition hover:border-[#1565c0] hover:text-[#1565c0] sm:w-auto"
                 >
-                  See destinations
+                  <span className="btn-fx-content">See destinations</span>
+                  <ButtonCelebration variant="plane" />
                 </Link>
               </MagneticButton>
             </div>

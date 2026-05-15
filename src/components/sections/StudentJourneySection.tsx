@@ -1,3 +1,4 @@
+import { ButtonCelebration } from "@/components/ButtonCelebration";
 import Image from "next/image";
 import Link from "next/link";
 import { 
@@ -183,17 +184,21 @@ export function StudentJourneySection() {
                 <MagneticButton className="w-full sm:w-auto">
                   <Link
                     href="/#contact"
-                    className="inline-flex w-full items-center justify-center gap-3 bg-[#f4a800] px-8 py-4 text-sm font-black text-[#07111f] transition hover:bg-[#ffd15a] shadow-xl shadow-[#f4a800]/20"
+                    className="btn-fx inline-flex w-full items-center justify-center bg-[#f4a800] px-8 py-4 text-sm font-black text-[#07111f] shadow-xl shadow-[#f4a800]/20 transition hover:bg-[#ffd15a]"
                   >
-                    Start my journey
-                    <ArrowIcon />
+                    <span className="btn-fx-content">
+                      Start my journey
+                      <ArrowIcon />
+                    </span>
+                    <ButtonCelebration variant="scholar" />
                   </Link>
                 </MagneticButton>
                 <Link
                   href="/#services"
-                  className="inline-flex w-full sm:w-auto items-center justify-center border-2 border-slate-200 bg-white px-8 py-4 text-sm font-black text-[#07111f] transition hover:border-[#1565c0] hover:text-[#1565c0]"
+                  className="btn-fx inline-flex w-full items-center justify-center border-2 border-slate-200 bg-white px-8 py-4 text-sm font-black text-[#07111f] transition hover:border-[#1565c0] hover:text-[#1565c0] sm:w-auto"
                 >
-                  See visa process
+                  <span className="btn-fx-content">See visa process</span>
+                  <ButtonCelebration variant="passport" />
                 </Link>
               </div>
             </div>
