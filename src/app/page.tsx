@@ -10,18 +10,18 @@ import { HeroCanvas } from "@/components/sections/HeroCanvas";
 import { BlueprintHeroSection } from "@/components/sections/BlueprintHeroSection";
 import { SuccessRoadMarquee } from "@/components/sections/SuccessRoadMarquee";
 import { motion } from "framer-motion";
-import { 
-  RevealOnScroll, 
-  SplitTextReveal, 
-  CountUp, 
-  StaggerCards, 
+import {
+  RevealOnScroll,
+  SplitTextReveal,
+  CountUp,
+  StaggerCards,
   DrawLine,
   HeroCoverReveal,
   MagneticButton,
   WipeRevealSection,
   ParallaxLayer,
   ScribbleImageReveal,
-  FloatingPlane2D, 
+  FloatingPlane2D,
   FloatingStar2D,
   HeroTypewriter,
 } from "@/components/sections/AnimationKit";
@@ -195,9 +195,8 @@ function UniversityLogoTile({ university }: { university: UniversityLogo }) {
           width={university.width}
           height={72}
           unoptimized
-          className={`h-auto max-h-12 w-auto max-w-full object-contain opacity-75 transition duration-300 group-hover:opacity-100 group-hover:drop-shadow-[0_0_18px_rgba(244,168,0,0.25)] ${
-            university.mono ? "brightness-0 invert" : ""
-          }`}
+          className={`h-auto max-h-12 w-auto max-w-full object-contain opacity-75 transition duration-300 group-hover:opacity-100 group-hover:drop-shadow-[0_0_18px_rgba(244,168,0,0.25)] ${university.mono ? "brightness-0 invert" : ""
+            }`}
         />
       ) : (
         <div className="flex flex-col items-center text-white/80 transition duration-300 group-hover:text-white">
@@ -217,11 +216,10 @@ function UniversityLogoRow({ reverse = false }: { reverse?: boolean }) {
   return (
     <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
       <div
-        className={`flex w-max gap-5 py-2 motion-reduce:animate-none ${
-          reverse
+        className={`flex w-max gap-5 py-2 motion-reduce:animate-none ${reverse
             ? "animate-[marquee_44s_linear_infinite] [animation-direction:reverse]"
             : "animate-[marquee_40s_linear_infinite]"
-        }`}
+          }`}
       >
         {repeatedLogos.map((university, index) => (
           <UniversityLogoTile key={`${university.name}-${index}`} university={university} />
@@ -234,7 +232,8 @@ function UniversityLogoRow({ reverse = false }: { reverse?: boolean }) {
 export default function Home() {
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />
@@ -256,7 +255,7 @@ export default function Home() {
               className="object-cover object-top opacity-60"
             />
           </div>
-          
+
           {/* 3D Canvas Layer */}
           <HeroCanvas />
           <HeroCoverReveal />
@@ -267,7 +266,7 @@ export default function Home() {
 
           {/* Light gradient overlay on the left only */}
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(7,17,31,0.35)_0%,rgba(7,17,31,0.15)_40%,transparent_100%)]" />
-          
+
           {/* Bottom fade into main page */}
           <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-[linear-gradient(0deg,#f4f0e8_0%,transparent_100%)]" />
 
@@ -279,7 +278,7 @@ export default function Home() {
                   Study abroad command room
                 </div>
               </RevealOnScroll>
-              
+
               <div className="mt-7">
                 <RevealOnScroll delay={0.1}>
                   <h1 className="font-display text-3xl font-extrabold leading-[0.95] text-white sm:text-5xl lg:text-7xl">
@@ -385,8 +384,8 @@ export default function Home() {
               <RevealOnScroll direction="right">
                 <SectionLabel>About the new BlueShore</SectionLabel>
                 <div className="mt-5">
-                  <SplitTextReveal 
-                    text="Not counselling as a package. Counselling as a decision system." 
+                  <SplitTextReveal
+                    text="Not counselling as a package. Counselling as a decision system."
                     className="max-w-3xl font-display text-4xl font-bold leading-tight text-[#07111f] sm:text-5xl"
                   />
                 </div>
@@ -431,8 +430,8 @@ export default function Home() {
                 <RevealOnScroll direction="up">
                   <SectionLabel>Services</SectionLabel>
                   <div className="mt-5">
-                    <SplitTextReveal 
-                      text="Four lanes, one clean journey." 
+                    <SplitTextReveal
+                      text="Four lanes, one clean journey."
                       className="font-display text-4xl font-bold leading-tight text-[#07111f] sm:text-5xl"
                     />
                   </div>
@@ -459,7 +458,7 @@ export default function Home() {
                       {lane.step}
                     </span>
                     <div className="h-12 w-12 border border-slate-200 bg-white p-2 transition-all duration-500 group-hover:bg-[#0c6b6a] group-hover:border-[#0c6b6a] group-hover:rotate-12 flex items-center justify-center">
-                       <ArrowIcon />
+                      <ArrowIcon />
                     </div>
                   </div>
                   <h3 className="mt-10 font-display text-2xl font-bold text-[#07111f]">
@@ -487,7 +486,7 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-[#07111f]/90" />
           </ParallaxLayer>
-          
+
           <FloatingPlane2D className="absolute right-[5%] top-[15%] z-0 opacity-20 rotate-45" size={100} delay={0.5} />
 
           <div className="mx-auto max-w-7xl relative z-10">
@@ -496,8 +495,8 @@ export default function Home() {
                 <RevealOnScroll direction="left">
                   <SectionLabel tone="light">Destination radar</SectionLabel>
                   <div className="mt-6">
-                    <SplitTextReveal 
-                      text="Countries are not picked from a brochure. They are matched to outcomes." 
+                    <SplitTextReveal
+                      text="Countries are not picked from a brochure. They are matched to outcomes."
                       className="font-display text-4xl font-bold leading-tight sm:text-5xl"
                     />
                   </div>
@@ -505,7 +504,7 @@ export default function Home() {
                     The same student can have very different odds by country, intake, course, and
                     visa evidence. BlueShore turns that complexity into a shortlist you can compare.
                   </p>
-                  
+
                   <DrawLine className="mt-10 max-w-xs" />
                 </RevealOnScroll>
               </div>
@@ -533,7 +532,7 @@ export default function Home() {
                       </p>
                       <h3 className="mt-6 font-display text-3xl font-bold">{destination.country}</h3>
                       <p className="mt-4 text-sm leading-7 text-white/60 group-hover:text-white/80 transition-colors">{destination.signal}</p>
-                      
+
                       <div className="mt-8 flex justify-end">
                         <div className="h-8 w-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-[#07111f] transition-all">
                           <ArrowIcon />
@@ -553,8 +552,8 @@ export default function Home() {
               <RevealOnScroll direction="lens">
                 <SectionLabel>Success stories</SectionLabel>
                 <div className="mt-6">
-                  <SplitTextReveal 
-                    text="The result should feel calm before it feels exciting." 
+                  <SplitTextReveal
+                    text="The result should feel calm before it feels exciting."
                     className="max-w-3xl font-display text-4xl font-bold leading-tight text-[#07111f] sm:text-5xl"
                   />
                 </div>
@@ -593,7 +592,7 @@ export default function Home() {
                   className="object-cover opacity-90 transition-all duration-1000 group-hover:scale-105 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-transparent" />
-                
+
                 <div className="absolute inset-x-0 top-0 p-8 text-[#07111f] z-10 text-left">
                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#f4a800]">
                     Student outcome
@@ -609,70 +608,70 @@ export default function Home() {
 
         <WipeRevealSection>
           <section id="blog" className="scroll-mt-28 bg-white px-4 py-28 sm:px-8 lg:px-12">
-          <div className="mx-auto max-w-7xl">
-            <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-              <RevealOnScroll direction="up">
-                <SectionLabel>Resources</SectionLabel>
-                <div className="mt-5">
-                  <SplitTextReveal 
-                    text="Field notes for ambitious applications." 
-                    className="max-w-2xl font-display text-4xl font-bold leading-tight text-[#07111f] sm:text-5xl"
-                  />
-                </div>
-              </RevealOnScroll>
-              
-              <RevealOnScroll direction="up" delay={0.2}>
-                <MagneticButton>
-                  <Link
-                    href="/contact"
-                    scroll={false}
-                    className="btn-fx inline-flex w-fit items-center border-2 border-[#07111f] px-8 py-4 text-sm font-black text-[#07111f] transition hover:bg-[#07111f] hover:text-white"
-                  >
-                    <span className="btn-fx-content">
-                      Ask for a roadmap
-                      <ArrowIcon />
-                    </span>
-                    <ButtonCelebration variant="confetti" />
-                  </Link>
-                </MagneticButton>
-              </RevealOnScroll>
-            </div>
-
-            <StaggerCards className="mt-16 grid gap-8 lg:grid-cols-3">
-              {resources.map((resource, i) => (
-                <RevealOnScroll key={resource.title} direction="diagonal" delay={i * 0.1}>
-                  <article data-stagger-card className="group cursor-pointer">
-                    <ScribbleImageReveal className="aspect-[4/3] bg-slate-900">
-                      <Image
-                        src={resource.image}
-                        alt={resource.title}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 30vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#07111f] via-transparent to-transparent opacity-60" />
-                      <div className="absolute left-6 top-6">
-                        <span className="bg-[#f4a800] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#07111f]">
-                          {resource.type}
-                        </span>
-                      </div>
-                    </ScribbleImageReveal>
-                    <div className="mt-6">
-                      <h3 className="font-display text-xl font-bold text-[#07111f] group-hover:text-[#f4a800] transition-colors">
-                        {resource.title}
-                      </h3>
-                      <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
-                        <span>Read field note</span>
-                        <div className="h-[1px] w-8 bg-slate-200 transition-all group-hover:w-12 group-hover:bg-[#f4a800]" />
-                      </div>
-                    </div>
-                  </article>
+            <div className="mx-auto max-w-7xl">
+              <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+                <RevealOnScroll direction="up">
+                  <SectionLabel>Resources</SectionLabel>
+                  <div className="mt-5">
+                    <SplitTextReveal
+                      text="Field notes for ambitious applications."
+                      className="max-w-2xl font-display text-4xl font-bold leading-tight text-[#07111f] sm:text-5xl"
+                    />
+                  </div>
                 </RevealOnScroll>
-              ))}
-            </StaggerCards>
-          </div>
-        </section>
-      </WipeRevealSection>
+
+                <RevealOnScroll direction="up" delay={0.2}>
+                  <MagneticButton>
+                    <Link
+                      href="/contact"
+                      scroll={false}
+                      className="btn-fx inline-flex w-fit items-center border-2 border-[#07111f] px-8 py-4 text-sm font-black text-[#07111f] transition hover:bg-[#07111f] hover:text-white"
+                    >
+                      <span className="btn-fx-content">
+                        Ask for a roadmap
+                        <ArrowIcon />
+                      </span>
+                      <ButtonCelebration variant="confetti" />
+                    </Link>
+                  </MagneticButton>
+                </RevealOnScroll>
+              </div>
+
+              <StaggerCards className="mt-16 grid gap-8 lg:grid-cols-3">
+                {resources.map((resource, i) => (
+                  <RevealOnScroll key={resource.title} direction="diagonal" delay={i * 0.1}>
+                    <article data-stagger-card className="group cursor-pointer">
+                      <ScribbleImageReveal className="aspect-[4/3] bg-slate-900">
+                        <Image
+                          src={resource.image}
+                          alt={resource.title}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 30vw"
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#07111f] via-transparent to-transparent opacity-60" />
+                        <div className="absolute left-6 top-6">
+                          <span className="bg-[#f4a800] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#07111f]">
+                            {resource.type}
+                          </span>
+                        </div>
+                      </ScribbleImageReveal>
+                      <div className="mt-6">
+                        <h3 className="font-display text-xl font-bold text-[#07111f] group-hover:text-[#f4a800] transition-colors">
+                          {resource.title}
+                        </h3>
+                        <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+                          <span>Read field note</span>
+                          <div className="h-[1px] w-8 bg-slate-200 transition-all group-hover:w-12 group-hover:bg-[#f4a800]" />
+                        </div>
+                      </div>
+                    </article>
+                  </RevealOnScroll>
+                ))}
+              </StaggerCards>
+            </div>
+          </section>
+        </WipeRevealSection>
         <BlueprintHeroSection />
 
         <section
@@ -681,7 +680,7 @@ export default function Home() {
         >
           {/* Background Strategy Map */}
           <div className="absolute inset-0 -z-10 opacity-10">
-            <Image 
+            <Image
               src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=1800"
               alt="Global strategy grid"
               fill
@@ -691,17 +690,17 @@ export default function Home() {
               className="object-cover"
             />
           </div>
-          
+
           <div className="grid h-full lg:grid-cols-2">
-            
+
             {/* Left: Perfectly Aligned Strategic Form (Sticky Header) */}
             <div className="relative z-30 h-full w-full overflow-y-auto scrollbar-hide">
-              
+
               {/* STICKY HEADER: Always Visible at the top of the scrollable column */}
               <div className="sticky top-0 z-40 px-6 pt-16 pb-10 sm:px-12 lg:px-20 bg-[#07111f]">
                 <div className="mx-auto w-full max-w-2xl">
-                  <motion.div 
-                    animate={{ opacity: 1, x: 0 }} 
+                  <motion.div
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                     className="flex flex-col items-start text-left"
                   >
@@ -722,7 +721,7 @@ export default function Home() {
               {/* SCROLLABLE CONTENT: Data Entry Fields */}
               <div className="px-6 pb-20 sm:px-12 lg:px-20">
                 <div className="mx-auto w-full max-w-2xl">
-                  <form 
+                  <form
                     className="grid gap-10 sm:grid-cols-2"
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -734,8 +733,8 @@ export default function Home() {
                       { l: "Last name", p: "Enter last name", full: false },
                       { l: "Email address*", p: "hello@blueshore.com", full: true },
                     ].map((field) => (
-                      <div 
-                        key={field.l} 
+                      <div
+                        key={field.l}
                         className={`group space-y-1 ${field.full ? "sm:col-span-2" : ""}`}
                       >
                         <label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/50 group-focus-within:text-[#f4a800] transition-colors">{field.l}</label>
@@ -750,7 +749,7 @@ export default function Home() {
                         <input type="tel" placeholder="98765 43210" className="flex-1 border-b border-white/20 bg-transparent py-2 text-lg font-medium text-white focus:border-[#f4a800] focus:outline-none transition-all placeholder:text-white/5" />
                       </div>
                     </div>
-                    
+
                     {[
                       { l: "Destination*", o: ["Select", "UK", "Canada", "Australia", "Germany", "USA"] },
                       { l: "Timeframe*", o: ["Select", "Within 3 months", "3-6 months", "6-12 months"] },

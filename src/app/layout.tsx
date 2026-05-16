@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
+import { SplashScreen } from "@/components/layout/SplashScreen";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -146,6 +147,7 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${dmSans.variable} h-full scroll-smooth`}>
       <body className="min-h-full bg-white font-sans text-slate-900 antialiased">
         <JsonLd />
+        <SplashScreen />
         {children}
       </body>
     </html>
