@@ -95,7 +95,8 @@ export function DestinationsSection() {
             <div className="mt-12">
               <MagneticButton>
                 <Link
-                  href="/#contact"
+                  href="/contact"
+                  scroll={false}
                   className="btn-fx inline-flex items-center justify-center bg-[#f4a800] px-10 py-5 text-sm font-black text-[#02081f] shadow-2xl shadow-[#f4a800]/20 transition hover:bg-[#ffd15a]"
                 >
                   <span className="btn-fx-content">Get a destination shortlist</span>

@@ -3,22 +3,20 @@
 import { Logo } from "@/components/brand/Logo";
 import { ButtonCelebration } from "@/components/ButtonCelebration";
 import { MagneticButton } from "@/components/sections/AnimationKit";
-import { NAV_LINKS } from "@/lib/constants";
+import { getSectionIdFromPathname, NAV_LINKS } from "@/lib/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-function navHrefToSectionId(href: string) {
-  const i = href.lastIndexOf("#");
-  return i >= 0 ? href.slice(i + 1) : href;
-}
-
-const SECTION_IDS = NAV_LINKS.map((l) => navHrefToSectionId(l.href));
+const SECTION_IDS = NAV_LINKS.map((l) => l.sectionId);
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const hasMounted = useRef(false);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -57,6 +55,36 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", updateScrolled);
   }, []);
 
+  useEffect(() => {
+    const sectionId = getSectionIdFromPathname(pathname);
+
+    if (!sectionId) return;
+
+    const behavior: ScrollBehavior = hasMounted.current ? "smooth" : "auto";
+    const frames: number[] = [];
+
+    hasMounted.current = true;
+
+    frames[0] = window.requestAnimationFrame(() => {
+      frames[1] = window.requestAnimationFrame(() => {
+        const target = document.getElementById(sectionId);
+
+        if (!target) return;
+
+        setActive(sectionId);
+
+        if (sectionId === "home") {
+          window.scrollTo({ top: 0, behavior });
+          return;
+        }
+
+        target.scrollIntoView({ block: "center", behavior });
+      });
+    });
+
+    return () => frames.forEach((frame) => window.cancelAnimationFrame(frame));
+  }, [pathname]);
+
   const underlineLayoutId = useMemo(() => "nav-underline", []);
 
   return (
@@ -77,7 +105,8 @@ export function Navigation() {
           aria-label="Primary"
         >
           <Link
-            href="/#home"
+            href="/"
+            scroll={false}
             className="shrink-0"
             aria-label="BlueShore Overseas home"
           >
@@ -86,7 +115,7 @@ export function Navigation() {
 
           <ul className="relative hidden items-center gap-3 lg:flex">
             {NAV_LINKS.map((link) => {
-              const id = navHrefToSectionId(link.href);
+              const id = link.sectionId;
 
               const isActive = active === id;
 
@@ -94,6 +123,7 @@ export function Navigation() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    scroll={false}
                     className={`relative px-1 py-2 text-xs font-black uppercase tracking-[0.16em] transition-colors ${
                       isActive
                         ? "text-[#c68b20]"
@@ -122,7 +152,8 @@ export function Navigation() {
           <div className="flex items-center gap-3">
             <MagneticButton>
               <Link
-                href="/#contact"
+                href="/contact"
+                scroll={false}
                 className="btn-fx hidden bg-[#f4a800] px-5 py-2.5 text-sm font-black text-[#07111f] shadow-xl transition hover:bg-[#ffc53d] md:inline-flex"
               >
                 <span className="btn-fx-content">Get Free Counselling</span>
@@ -202,6 +233,7 @@ export function Navigation() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
+                        scroll={false}
                         className="block border-b border-slate-200 px-1 py-4 text-lg font-semibold text-[#07111f] hover:text-[#c68b20]"
                         onClick={() => setOpen(false)}
                       >
@@ -212,7 +244,8 @@ export function Navigation() {
                 </ul>
 
                 <Link
-                  href="/#contact"
+                  href="/contact"
+                  scroll={false}
                   className="btn-fx mt-auto bg-[#f4a800] px-5 py-3 text-center text-base font-black text-[#07111f]"
                   onClick={() => setOpen(false)}
                 >

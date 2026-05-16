@@ -11,14 +11,22 @@ export const BRAND = {
 } as const;
 
 export const NAV_LINKS = [
-  { href: "/#home", label: "Home" },
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#destinations", label: "Destinations" },
-  { href: "/#success", label: "Success Stories" },
-  { href: "/#blog", label: "Blog" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/", label: "Home", sectionId: "home" },
+  { href: "/about", label: "About", sectionId: "about" },
+  { href: "/services", label: "Services", sectionId: "services" },
+  { href: "/destinations", label: "Destinations", sectionId: "destinations" },
+  { href: "/success", label: "Success Stories", sectionId: "success" },
+  { href: "/blog", label: "Blog", sectionId: "blog" },
+  { href: "/contact", label: "Contact", sectionId: "contact" },
 ] as const;
+
+export const SECTION_PATHS = NAV_LINKS.map((link) => link.href.slice(1)).filter(Boolean);
+
+export function getSectionIdFromPathname(pathname: string) {
+  const normalized = pathname.replace(/\/+$/, "") || "/";
+
+  return NAV_LINKS.find((link) => link.href === normalized)?.sectionId;
+}
 
 export type DestinationPin = {
   id: string;

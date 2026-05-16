@@ -183,7 +183,8 @@ export function StudentJourneySection() {
               <div className="mt-8 lg:mt-10 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton className="w-full sm:w-auto">
                   <Link
-                    href="/#contact"
+                    href="/contact"
+                    scroll={false}
                     className="btn-fx inline-flex w-full items-center justify-center bg-[#f4a800] px-8 py-4 text-sm font-black text-[#07111f] shadow-xl shadow-[#f4a800]/20 transition hover:bg-[#ffd15a]"
                   >
                     <span className="btn-fx-content">
@@ -194,7 +195,8 @@ export function StudentJourneySection() {
                   </Link>
                 </MagneticButton>
                 <Link
-                  href="/#services"
+                  href="/services"
+                  scroll={false}
                   className="btn-fx inline-flex w-full items-center justify-center border-2 border-slate-200 bg-white px-8 py-4 text-sm font-black text-[#07111f] transition hover:border-[#1565c0] hover:text-[#1565c0] sm:w-auto"
                 >
                   <span className="btn-fx-content">See visa process</span>

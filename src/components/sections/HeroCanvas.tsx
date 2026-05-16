@@ -33,12 +33,16 @@ function WireGlobe() {
 
 /* ─── Camera subtle sway ───────────────────────────────────────── */
 function CameraRig() {
-  const { camera } = useThree();
+  const camera = useThree((state) => state.camera);
+
   useFrame(({ mouse }) => {
-    camera.position.x += (mouse.x * 0.4 - camera.position.x) * 0.04;
-    camera.position.y += (mouse.y * 0.2 - camera.position.y) * 0.04;
+    const x = camera.position.x + (mouse.x * 0.4 - camera.position.x) * 0.04;
+    const y = camera.position.y + (mouse.y * 0.2 - camera.position.y) * 0.04;
+
+    camera.position.set(x, y, camera.position.z);
     camera.lookAt(0, 0, 0);
   });
+
   return null;
 }
 

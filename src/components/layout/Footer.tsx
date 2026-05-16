@@ -1,5 +1,5 @@
 import { Logo } from "@/components/brand/Logo";
-import { MagneticButton } from "@/components/sections/AnimationKit";
+import { FancyFadingFooter } from "@/components/sections/AnimationKit";
 import { NAV_LINKS } from "@/lib/constants";
 import Link from "next/link";
 
@@ -22,7 +22,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-white px-4 pb-12 pt-24 text-[#07111f] sm:px-8 lg:px-12 border-t border-slate-100">
+    <FancyFadingFooter>
+      <footer className="relative overflow-hidden bg-white px-4 pb-12 pt-24 text-[#07111f] sm:px-8 lg:px-12 border-t border-slate-100">
       {/* Subtle Luminous Background Accents */}
       <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#f4a800]/10 blur-3xl" />
       <div className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#0c6b6a]/10 blur-3xl" />
@@ -47,7 +48,11 @@ export function Footer() {
           <ul className="mt-8 space-y-4 text-sm">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <Link className="text-[#07111f]/70 transition-colors hover:text-[#f4a800]" href={link.href}>
+                <Link
+                  className="text-[#07111f]/70 transition-colors hover:text-[#f4a800]"
+                  href={link.href}
+                  scroll={false}
+                >
                   {link.label}
                 </Link>
               </li>
@@ -112,17 +117,18 @@ export function Footer() {
       <div className="relative mx-auto mt-24 flex max-w-7xl flex-col gap-8 border-t border-[#07111f]/10 pt-12 text-[10px] font-black uppercase tracking-[0.2em] text-[#07111f]/50 sm:flex-row sm:items-center sm:justify-between">
         <p>© {year} BlueShore Overseas Intelligence. Built for Strategy.</p>
         <div className="flex flex-wrap gap-8">
-          <Link className="transition-colors hover:text-[#f4a800]" href="/#contact">
+          <Link className="transition-colors hover:text-[#f4a800]" href="/contact" scroll={false}>
             Request Audit
           </Link>
-          <a className="transition-colors hover:text-[#f4a800]" href="#">
+          <span className="text-[#07111f]/40">
             Privacy Protocol
-          </a>
-          <a className="transition-colors hover:text-[#f4a800]" href="#">
+          </span>
+          <span className="text-[#07111f]/40">
             Legal
-          </a>
+          </span>
         </div>
       </div>
-    </footer>
+      </footer>
+    </FancyFadingFooter>
   );
 }

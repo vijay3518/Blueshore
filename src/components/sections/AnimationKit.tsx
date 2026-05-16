@@ -1,10 +1,12 @@
 "use client";
 
-import { motion, useInView, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useInView, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef, useEffect, useState, type ReactNode } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const BLUE_SHORE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -46,7 +48,7 @@ export function RevealOnScroll({
       transition: {
         duration: 0.85,
         delay,
-        ease: [0.22, 1, 0.36, 1] as any,
+        ease: BLUE_SHORE_EASE,
       },
     },
   };
@@ -96,7 +98,7 @@ export function SplitTextReveal({
           transition={{
             duration: 0.65,
             delay: i * stagger,
-            ease: [0.22, 1, 0.36, 1] as any,
+            ease: BLUE_SHORE_EASE,
           }}
           style={{ perspective: "600px", transformStyle: "preserve-3d" }}
         >
@@ -219,9 +221,131 @@ export function DrawLine({ className = "", color = "#f4a800" }: { className?: st
         style={{ background: color }}
         initial={{ scaleX: 0 }}
         animate={inView ? { scaleX: 1 } : {}}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] as any }}
+        transition={{ duration: 1.1, ease: BLUE_SHORE_EASE }}
       />
     </div>
+  );
+}
+
+/* Branded hero cover reveal */
+export function HeroCoverReveal({ className = "" }: { className?: string }) {
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) return null;
+
+  return (
+    <div className={`pointer-events-none absolute inset-0 z-30 overflow-hidden ${className}`} aria-hidden>
+      <motion.div
+        className="absolute inset-0 bg-[#07111f]"
+        initial={{ clipPath: "inset(0 0 0 0)" }}
+        animate={{ clipPath: "inset(0 0 0 100%)" }}
+        transition={{ duration: 1.05, delay: 0.1, ease: BLUE_SHORE_EASE }}
+      />
+      <motion.div
+        className="absolute inset-y-0 left-0 w-full bg-[#f4a800]"
+        initial={{ clipPath: "polygon(0 0, 100% 0, 88% 100%, 0 100%)" }}
+        animate={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}
+        transition={{ duration: 1.18, delay: 0.25, ease: BLUE_SHORE_EASE }}
+      />
+      <motion.div
+        className="absolute inset-y-0 left-0 w-full bg-[#1687d9]"
+        initial={{ clipPath: "polygon(0 0, 72% 0, 58% 100%, 0 100%)" }}
+        animate={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)" }}
+        transition={{ duration: 1.28, delay: 0.38, ease: BLUE_SHORE_EASE }}
+      />
+      <motion.div
+        className="absolute inset-y-0 left-[-10%] w-1/3 rotate-12 bg-white/50 blur-xl"
+        initial={{ x: "-20%", opacity: 0 }}
+        animate={{ x: "360%", opacity: [0, 0.55, 0] }}
+        transition={{ duration: 0.95, delay: 0.65, ease: "easeOut" }}
+      />
+    </div>
+  );
+}
+
+/* Scribble image reveal with SVG strokes and blend modes */
+export function ScribbleImageReveal({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-90px" });
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`group relative isolate overflow-hidden ${className}`}
+      initial={reduceMotion ? false : { clipPath: "inset(0 100% 0 0)" }}
+      animate={inView || reduceMotion ? { clipPath: "inset(0 0% 0 0)" } : {}}
+      transition={{ duration: 1.05, ease: BLUE_SHORE_EASE }}
+    >
+      {children}
+
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-10 bg-[#f4a800]/30 mix-blend-multiply"
+        initial={reduceMotion ? false : { x: "-100%" }}
+        animate={inView || reduceMotion ? { x: "110%" } : {}}
+        transition={{ duration: 1.2, delay: 0.08, ease: BLUE_SHORE_EASE }}
+        aria-hidden
+      />
+
+      <svg
+        className="pointer-events-none absolute inset-0 z-20 h-full w-full mix-blend-screen"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        {[
+          "M-4 21 C 18 4, 34 37, 53 17 S 88 4, 104 27",
+          "M-5 49 C 16 37, 25 70, 47 49 S 77 31, 105 57",
+          "M-2 79 C 22 67, 38 95, 56 74 S 87 60, 103 84",
+        ].map((d, index) => (
+          <motion.path
+            key={d}
+            d={d}
+            fill="none"
+            stroke={index === 1 ? "#f4a800" : "#ffffff"}
+            strokeLinecap="round"
+            strokeWidth={index === 1 ? 2.2 : 1.35}
+            initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
+            animate={inView || reduceMotion ? { pathLength: 1, opacity: [0, 0.85, 0] } : {}}
+            transition={{
+              duration: 1.35,
+              delay: 0.16 + index * 0.12,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </svg>
+    </motion.div>
+  );
+}
+
+/* Footer fades into view as it reaches the viewport */
+export function FancyFadingFooter({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start 62%"],
+  });
+  const opacity = useTransform(scrollYProgress, [0, 1], [0.18, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [80, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.985, 1]);
+
+  return (
+    <motion.div ref={ref} className={className} style={{ opacity, y, scale }}>
+      {children}
+    </motion.div>
   );
 }
 

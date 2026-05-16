@@ -21,7 +21,7 @@ const BLUEPRINT_CARDS = [
   { id: 11, country: "se", image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600", title: "Sweden Innovation", meta: "Stockholm STEM" },
   { id: 12, country: "ch", image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80&w=600", title: "Swiss Excellence", meta: "Hospitality & Finance" },
   { id: 13, country: "it", image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=600", title: "Italy Heritage", meta: "Milan Design Path" },
-  { id: 14, country: "es", image: "https://images.unsplash.com/photo-1539037116277-4db20d5bc507?auto=format&fit=crop&q=80&w=600", title: "Spain IESE Path", meta: "Barcelona Business" },
+  { id: 14, country: "es", image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&q=80&w=600", title: "Spain IESE Path", meta: "Barcelona Business" },
   { id: 15, country: "pl", image: "https://images.unsplash.com/photo-1519197924294-4ba991a11128?auto=format&fit=crop&q=80&w=600", title: "Poland Medical", meta: "EU STEM Corridor" },
 ];
 
@@ -125,7 +125,8 @@ export function BlueprintHeroSection() {
             <RevealOnScroll direction="up" delay={0.4}>
               <MagneticButton>
                 <Link 
-                  href="/#contact"
+                  href="/contact"
+                  scroll={false}
                   className="btn-fx group relative flex h-16 items-center justify-center rounded-full bg-[#f4a800] px-12 text-sm font-black text-white shadow-[0_20px_50px_-10px_rgba(244,168,0,0.4)] transition hover:bg-[#d69300]"
                 >
                   <span className="btn-fx-content">Let&apos;s Go</span>

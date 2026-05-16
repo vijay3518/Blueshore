@@ -16,9 +16,11 @@ import {
   CountUp, 
   StaggerCards, 
   DrawLine,
+  HeroCoverReveal,
   MagneticButton,
   WipeRevealSection,
   ParallaxLayer,
+  ScribbleImageReveal,
   FloatingPlane2D, 
   FloatingStar2D,
   HeroTypewriter,
@@ -257,6 +259,7 @@ export default function Home() {
           
           {/* 3D Canvas Layer */}
           <HeroCanvas />
+          <HeroCoverReveal />
 
           {/* Floating Accents */}
           <FloatingPlane2D className="absolute left-[10%] top-[40%] z-10 opacity-30 hidden lg:block" delay={1.2} size={60} />
@@ -295,7 +298,8 @@ export default function Home() {
               <RevealOnScroll delay={0.5} className="mt-9 flex flex-col gap-4 sm:flex-row">
                 <MagneticButton className="w-full sm:w-auto">
                   <Link
-                    href="/#contact"
+                    href="/contact"
+                    scroll={false}
                     className="btn-fx inline-flex w-full items-center justify-center bg-[#f4a800] px-8 py-4 text-sm font-black text-[#07111f] shadow-xl shadow-black/20 transition hover:bg-[#ffd15a]"
                   >
                     <span className="btn-fx-content">
@@ -306,7 +310,8 @@ export default function Home() {
                   </Link>
                 </MagneticButton>
                 <Link
-                  href="/#services"
+                  href="/services"
+                  scroll={false}
                   className="btn-fx inline-flex w-full items-center justify-center border border-white/30 bg-white/10 px-8 py-4 text-sm font-black text-white shadow-xl shadow-black/10 backdrop-blur transition hover:bg-white/20 sm:w-auto"
                 >
                   <span className="btn-fx-content">Explore the method</span>
@@ -359,7 +364,7 @@ export default function Home() {
         <section id="about" className="scroll-mt-28 px-4 py-24 sm:px-8 lg:px-12 overflow-hidden">
           <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
             <RevealOnScroll direction="left" className="relative">
-              <div className="relative min-h-[560px] overflow-hidden bg-[#07111f] shadow-2xl">
+              <ScribbleImageReveal className="min-h-[560px] bg-[#07111f] shadow-2xl">
                 <Image
                   src="/images/journey-counselling.png"
                   alt="Strategic education counselling as a decision system"
@@ -372,7 +377,7 @@ export default function Home() {
                     Arrival is designed before departure
                   </p>
                 </div>
-              </div>
+              </ScribbleImageReveal>
               <FloatingStar2D className="absolute -right-6 -top-6 z-10" color="#f4a800" size={48} delay={0.2} />
             </RevealOnScroll>
 
@@ -579,7 +584,7 @@ export default function Home() {
             </div>
 
             <RevealOnScroll direction="perspective" className="relative group">
-              <div className="relative min-h-[540px] overflow-hidden bg-white shadow-2xl">
+              <ScribbleImageReveal className="min-h-[540px] bg-white shadow-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1200"
                   alt="Successful student with quiet confidence"
@@ -597,7 +602,7 @@ export default function Home() {
                     Admitted, documented, visa-ready, and ready to land.
                   </p>
                 </div>
-              </div>
+              </ScribbleImageReveal>
             </RevealOnScroll>
           </div>
         </section>
@@ -619,7 +624,8 @@ export default function Home() {
               <RevealOnScroll direction="up" delay={0.2}>
                 <MagneticButton>
                   <Link
-                    href="/#contact"
+                    href="/contact"
+                    scroll={false}
                     className="btn-fx inline-flex w-fit items-center border-2 border-[#07111f] px-8 py-4 text-sm font-black text-[#07111f] transition hover:bg-[#07111f] hover:text-white"
                   >
                     <span className="btn-fx-content">
@@ -636,7 +642,7 @@ export default function Home() {
               {resources.map((resource, i) => (
                 <RevealOnScroll key={resource.title} direction="diagonal" delay={i * 0.1}>
                   <article data-stagger-card className="group cursor-pointer">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
+                    <ScribbleImageReveal className="aspect-[4/3] bg-slate-900">
                       <Image
                         src={resource.image}
                         alt={resource.title}
@@ -650,7 +656,7 @@ export default function Home() {
                           {resource.type}
                         </span>
                       </div>
-                    </div>
+                    </ScribbleImageReveal>
                     <div className="mt-6">
                       <h3 className="font-display text-xl font-bold text-[#07111f] group-hover:text-[#f4a800] transition-colors">
                         {resource.title}
@@ -782,7 +788,6 @@ export default function Home() {
             {/* Right: Aligned Luminous Success Road (100vh) */}
             <div className="relative hidden lg:block h-full overflow-hidden">
               <SuccessRoadMarquee />
-              
             </div>
 
           </div>

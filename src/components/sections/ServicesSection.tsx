@@ -172,7 +172,8 @@ export function ServicesSection() {
             <div className="mt-12 flex flex-col sm:flex-row">
               <MagneticButton className="w-full sm:w-auto">
                 <Link
-                  href="/#contact"
+                  href="/contact"
+                  scroll={false}
                   className="btn-fx inline-flex w-full items-center justify-center bg-[#0a1f5c] px-10 py-5 text-sm font-black text-white shadow-2xl shadow-[#0a1f5c]/20 transition hover:bg-[#1565c0]"
                 >
                   <span className="btn-fx-content">Get a free strategy call</span>
@@ -210,7 +211,8 @@ export function ServicesSection() {
               </div>
               <MagneticButton className="w-full sm:w-auto">
                 <Link
-                  href="/#destinations"
+                  href="/destinations"
+                  scroll={false}
                   className="btn-fx inline-flex w-full items-center justify-center border-2 border-slate-200 bg-white px-8 py-4 text-sm font-black text-[#0a1f5c] transition hover:border-[#1565c0] hover:text-[#1565c0] sm:w-auto"
                 >
                   <span className="btn-fx-content">See destinations</span>
