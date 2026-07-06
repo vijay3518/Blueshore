@@ -114,7 +114,7 @@ export function ContactBannerSection() {
                   type="tel"
                   name="phone"
                   className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-base text-white outline-none ring-bs-gold/40 placeholder:text-white/40 focus:ring-2"
-                  placeholder="+91 ..."
+                  placeholder="+91 8309629331"
                 />
               </label>
               <label className="flex flex-col gap-2 text-sm font-medium text-white/85">
