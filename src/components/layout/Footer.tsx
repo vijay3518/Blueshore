@@ -13,7 +13,7 @@ const SERVICES = [
 const CONTACT = {
   phoneDisplay: "+91 8309629331",
   phoneHref: "tel:+918309629331",
-  email: "strategy@blueshoreoverseas.com",
+  email: "info@blueshoreoverseas.com",
   emailHref: "mailto:info@blueshoreoverseas.com",
   locations: "Bengaluru / Mumbai / London / Dubai",
 } as const;
