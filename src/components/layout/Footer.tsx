@@ -11,8 +11,7 @@ const SERVICES = [
 ] as const;
 
 const CONTACT = {
-  phoneDisplay: "+91 8309629331 , 
-    9381326651",
+  phoneDisplay: "+91 8309629331 , 9381326651",
   phoneHref: "tel:+91 8309629331",
   email: "info@blueshoreoverseas.com",
   emailHref: "mailto:info@blueshoreoverseas.com",
